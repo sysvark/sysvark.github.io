@@ -16,7 +16,7 @@ try {
   for (const [width,height] of [[1440,900],[768,1024],[390,844]]) {
     await page.setViewportSize({width,height});
     await page.goto(process.env.REVISAR_PAGES === '1' ? 'https://sysvark.github.io/' : 'http://127.0.0.1:'+server.address().port+'/',{waitUntil:'networkidle'});
-    assert.equal(await page.locator('#proposal button[type=submit]').isDisabled(),true);
+    assert.equal(await page.locator('#proposal button[type=submit]').isDisabled(),false);
     assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth <= innerWidth));
     await page.screenshot({path:'docs/capturas/inicio-'+width+'.png'});
     if(width===1440) {
@@ -32,6 +32,12 @@ try {
       assert.equal(await page.locator('.nav-toggle').getAttribute('aria-expanded'),'false');
     }
   }
+  const contact = page.locator('#proposal');
+  for (const [name,value] of Object.entries({nombre:'Prueba',empresa:'Empresa ficticia',email:'prueba@example.com',proceso:'Preparar el cierre mensual.'})) await contact.locator('[name='+name+']').fill(value);
+  await contact.locator('[name=privacidad]').check();
+  await contact.locator('[type=submit]').click();
+  assert.match(await page.locator('#open-draft').getAttribute('href'),/mailto:sysvark@outlook.com/);
+  assert.match(await page.locator('#draft-text').inputValue(),/Preparar el cierre mensual/);
   await page.locator('#hours-number').fill('12');
   await page.locator('#rate-number').fill('20');
   await page.locator('#percent-number').fill('50');
@@ -52,8 +58,15 @@ try {
   const before = await layer.getAttribute('transform');
   await page.evaluate(()=>window.scrollBy({top:document.querySelector('.blueprint').getBoundingClientRect().top-50,behavior:'instant'}));
   await page.waitForFunction(value=>document.querySelector('.flow-layer').getAttribute('transform')!==value,before);
-  const firstLabel = await page.locator('.port-label').first().textContent();
-  await page.waitForFunction(value=>document.querySelector('.port-label').textContent!==value, firstLabel);
+  const snapshot = () => Array.from(document.querySelectorAll('.port-content'), n => n.dataset.icon).join(',');
+  const initial = await page.evaluate(snapshot);
+  for (let i=0, state=initial; i<3; i++) {
+    await page.waitForFunction(old => Array.from(document.querySelectorAll('.port-content'), n=>n.dataset.icon).join(',') !== old, state);
+    const next = await page.evaluate(snapshot);
+    assert.equal(new Set(next.split(',')).size,6);
+    assert.equal(next.split(',').filter((icon,j)=>icon !== state.split(',')[j]).length,1);
+    state = next;
+  }
   await page.locator('.demo-theater').scrollIntoViewIfNeeded();
   for (const name of ['bills','inbox','workflow','sheets']) {
     await page.locator('.scene.'+name+':visible').waitFor({timeout:33000});
@@ -65,5 +78,5 @@ try {
   await page.getByRole('button',{name:'Preparar registro',exact:true}).click();
   await page.locator('.scene.bills').screenshot({path:'docs/capturas/demostracion-factura.png'});
   assert.deepEqual(errors,[]);
-  console.log('Portada, tres tamaños, menú, calculadora, formulario inactivo, compactación y rotación de cuatro escenas correctas.');
+  console.log('Portada, tres tamaños, menú, calculadora, formulario editable, compactación y rotación de cuatro escenas correctas.');
 } finally { await browser.close(); server.close(); }

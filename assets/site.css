@@ -55,3 +55,15 @@ h3{font-size:1.32rem;letter-spacing:-.03em}.lead{max-width:43rem;margin-top:1rem
 
 .flow-packets{animation:deliver 2.4s linear infinite}@keyframes deliver{to{stroke-dashoffset:-109}}@media(prefers-reduced-motion:reduce){.flow-packets{animation:none}}
 .controls .calc-note{margin:.8rem 0 0;max-width:65ch;line-height:1.55}.founder-history{padding-block:clamp(2rem,4vw,4rem);border-top:1px solid var(--line)}.founder-history h2{font-size:clamp(1.7rem,3vw,2.4rem);letter-spacing:-.04em;margin:.4rem 0}.founder-history>p:last-child{max-width:65ch;line-height:1.65}.port-content{transition:opacity .42s ease-in-out}.port-content.fading{opacity:0}@media(prefers-reduced-motion:reduce){.port-content{transition:none}}
+
+#soluciones .lead{max-width:none;text-wrap:pretty}
+.blueprint{border:0;border-radius:0;background:transparent;box-shadow:none}
+.blueprint figcaption{font-family:inherit;font-weight:600;font-size:clamp(1.05rem,2vw,1.35rem);letter-spacing:-.025em;border:0;background:none;padding:.2rem 0 .65rem}
+.blueprint>svg{border-radius:8px;background:linear-gradient(115deg,#edf4f3,#e6eff1)}
+.blueprint-key{border:0;font-size:.85rem;font-family:inherit}
+.ink{background:linear-gradient(transparent 75%,#85b9b45c 75%) no-repeat left bottom;background-size:0 100%;transition:background-size .85s ease;box-decoration-break:clone;-webkit-box-decoration-break:clone}.ink.revealed{background-size:100% 100%}
+.estimate{font-variant-numeric:tabular-nums}.estimate .bar span{transition:width .36s ease-out}
+.experience-logos{list-style:none;padding:1.6rem 0;margin:1.3rem 0 0;border-block:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:2rem;flex-wrap:wrap}
+.experience-logos li{flex:1 1 98px;display:grid;place-items:center}.experience-logos img{width:100%;max-width:122px;height:42px;object-fit:contain;filter:grayscale(1);opacity:.81}.experience-logos li:last-child img{height:46px}
+@media(prefers-reduced-motion:no-preference){.experience-logos li.revealed{animation:mark-enter .85s ease backwards}.experience-logos li:nth-child(2){animation-delay:.1s}.experience-logos li:nth-child(3){animation-delay:.2s}.experience-logos li:nth-child(4){animation-delay:.3s}.experience-logos li:nth-child(5){animation-delay:.4s}@keyframes mark-enter{from{opacity:.15;transform:translateY(4px)}to{opacity:1;transform:none}}}
+@media(prefers-reduced-motion:reduce){.ink,.estimate .bar span{transition:none}}

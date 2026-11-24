@@ -32,23 +32,29 @@ const formatHours = new Intl.NumberFormat("es-ES", { maximumFractionDigits: 2 })
 const formatMoney = new Intl.NumberFormat("es-ES", { style: "currency", currency: "EUR" });
 const ranges = ids.map(id => document.getElementById(id + "-range"));
 
+let displayed;
+let estimateFrame;
+const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
 function displayEstimate() {
   const [hours, rate, percent] = ranges.map(range => Number(range.value));
   const monthlyHours = hours * 52 / 12;
   const monthlySaved = monthlyHours * percent / 100;
-  const hourText = value => formatHours.format(value) + " h";
-  const values = {
-    "monthly-hours": hourText(monthlyHours),
-    "monthly-saved": hourText(monthlySaved),
-    "remaining-hours": hourText(monthlyHours - monthlySaved),
-    "yearly-hours": hourText(monthlySaved * 12),
-    "monthly-cost": formatMoney.format(monthlyHours * rate),
-    "monthly-value": formatMoney.format(monthlySaved * rate),
-    "yearly-value": formatMoney.format(monthlySaved * rate * 12)
-  };
-  Object.entries(values).forEach(([id, value]) => {
-    document.getElementById(id).textContent = value;
-  });
+  const target = [monthlyHours, monthlySaved, monthlyHours - monthlySaved, monthlySaved * 12,
+    monthlyHours * rate, monthlySaved * rate, monthlySaved * rate * 12];
+  const outputs = ['monthly-hours','monthly-saved','remaining-hours','yearly-hours','monthly-cost','monthly-value','yearly-value'];
+  const start = displayed || target;
+  const duration = displayed && !reducedMotion.matches ? 360 : 0;
+  const began = performance.now();
+  cancelAnimationFrame(estimateFrame);
+  function paint(now) {
+    const t = duration ? Math.min(1, Math.max(0, (now - began) / duration)) : 1;
+    displayed = target.map((value, i) => t === 1 ? value : value + (start[i] - value) * (1 - t) ** 3);
+    outputs.forEach((id, i) => {
+      document.getElementById(id).textContent = i < 4 ? formatHours.format(displayed[i]) + ' h' : formatMoney.format(displayed[i]);
+    });
+    if (t < 1) estimateFrame = requestAnimationFrame(paint);
+  }
+  paint(began);
   document.getElementById("current-bar").style.width = hours > 0 ? "100%" : "0";
   document.getElementById("future-bar").style.width = (hours > 0 ? 100 - percent : 0) + "%";
 }
@@ -81,12 +87,12 @@ if (blueprint) {
   const layers = blueprint.querySelectorAll('.flow-layer');
   const labels = blueprint.querySelectorAll('.port-label');
   const motion = matchMedia('(prefers-reduced-motion: reduce)');
-  const tools = [
-    ['googlesheets','Sheets'],['googledrive','Drive'],['gmail','Gmail'],
-    ['notion','Notion'],['airtable','Airtable'],['googlecalendar','Calendar'],
-    ['googleforms','Forms'],['github','GitHub'],['n8n','n8n']
-  ];
-  let change = 0;
+  const sources = [['googlesheets','Filas'], ['googledrive','Archivos'], ['gmail','Consultas'],
+    ['googleforms','Solicitudes'], ['github','Incidencias'], ['airtable','Pedidos']];
+  const destinations = [['notion','Fichas'], ['airtable','Registros'], ['googlecalendar','Citas'],
+    ['gmail','Respuestas'], ['googlesheets','Informes'], ['googledrive','Copias']];
+  const pick = items => items[Math.floor(Math.random() * items.length)];
+  let previousNode;
   let fade;
   let timer;
   let frame;
@@ -105,16 +111,21 @@ if (blueprint) {
     compact();
     if (visible && !document.hidden && !motion.matches) {
       timer = setInterval(() => {
-        const index = change % labels.length;
-        const label = labels[index];
+        const used = new Set(Array.from(labels, label => label.parentNode.dataset.icon));
+        const options = Array.from(labels, (label, i) => ({
+          label, available: (i < 3 ? sources : destinations).filter(([icon]) => !used.has(icon))
+        })).filter(option => option.available.length && option.label !== previousNode);
+        if (!options.length) return;
+        const {label, available} = pick(options);
         const node = label.parentElement;
-        const [icon, name] = tools[(index + 3 * (1 + Math.floor(change / labels.length))) % tools.length];
+        const [icon, name] = pick(available);
         node.classList.add('fading');
         fade = setTimeout(() => {
           node.querySelector('image').setAttribute('href','/assets/logos/' + icon + '.svg');
           label.textContent = name;
           node.classList.remove('fading');
-          change++;
+          node.dataset.icon = icon;
+          previousNode = label;
         }, 440);
       }, 1900);
     }
@@ -125,3 +136,13 @@ if (blueprint) {
   motion.addEventListener('change', synchronize);
   document.addEventListener('visibilitychange', synchronize);
 }
+
+const reveal = new IntersectionObserver(entries => {
+  for (const entry of entries) {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('revealed');
+      reveal.unobserve(entry.target);
+    }
+  }
+}, {threshold: .3});
+document.querySelectorAll('.ink, .experience-logos li').forEach(element => reveal.observe(element));

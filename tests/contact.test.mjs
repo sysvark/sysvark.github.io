@@ -9,22 +9,23 @@ function fixture(endpoint, request) {
   const fields = {disabled:true}, status = {}, info = {};
   const form = {
     dataset:{endpoint}, querySelector:()=>fields, reportValidity:()=>true,
-    addEventListener(type, handler) { this.submit = handler; },
+    addEventListener(type, handler) { this[type] = handler; },
     reset() { this.wasReset = true; }
   };
-  const elements = {proposal:form, 'contact-info':info, 'send-status':status};
+  const elements = {proposal:form, 'contact-info':info, 'send-status':status,'draft-actions':{},'draft-text':{},'open-draft':{},'copy-draft':{addEventListener(){}}};
   vm.runInNewContext(code, {
     document:{getElementById:id=>elements[id]}, fetch:request,
-    FormData:class { get() { return ''; } }, AbortSignal
+    FormData:class { get(key) { return key === 'empresa' ? 'A & B' : ''; } }, AbortSignal
   });
-  return {form,fields,status,submit:()=>form.submit({preventDefault(){}})};
+  return {form,fields,status,elements,submit:()=>form.submit({preventDefault(){}})};
 }
 
-test('el formulario informativo permanece inactivo y evita transmisiones',async()=>{
+test('prepara un borrador con el destinatario y asunto sin transmitir datos',async()=>{
   let called = false;
   const view = fixture('',()=>{called=true;});
   await view.submit();
-  assert.equal(view.fields.disabled,true);
+  assert.equal(view.fields.disabled,false);
+  assert.match(view.elements["open-draft"].href,/mailto:sysvark@outlook.com.*A%20%26%20B/);
   assert.equal(called,false);
 });
 test('la confirmación requiere una respuesta positiva del proveedor',async()=>{
