@@ -40,6 +40,14 @@ try {
   assert.match(await page.locator('#monthly-value').innerText(),/520,00/);
   await page.locator('#demo-sample').click();
   await page.locator('#demo-report-results:visible').waitFor();
+  await page.emulateMedia({reducedMotion:'no-preference'});
+  const walkthrough = page.locator('#demo-report .walkthrough');
+  await walkthrough.scrollIntoViewIfNeeded();
+  await walkthrough.getByRole('button',{name:'Comparar',exact:true}).and(page.locator('[aria-pressed=true]')).waitFor({timeout:10000});
+  await walkthrough.getByRole('button',{name:'Consolidar',exact:true}).click();
+  assert.equal(await walkthrough.getByRole('button',{name:'Reproducir el ejemplo'}).isVisible(),true);
+  await page.locator('.flow-toggle').click();
+  assert.equal(await page.locator('.blueprint .signal path').first().evaluate(path=>getComputedStyle(path).animationPlayState),'paused');
   await page.locator('[data-demo-mode=invoice]').click();
   await page.locator('#demo-invoice-run').click();
   await page.locator('#demo-invoice-results:visible').waitFor();

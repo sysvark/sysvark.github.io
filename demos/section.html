@@ -20,10 +20,22 @@
               <p>Descarga las plantillas ficticias <a download href="./demos/files/operaciones-1.xlsx">Excel 1</a> · <a download href="./demos/files/operaciones-2.xlsx">Excel 2</a> · <a download href="./demos/files/operaciones-3.xlsx">Excel 3</a></p>
             </details>
           </div>
-          <div class="sv-demo-diagram" role="img" aria-label="Proceso manual: recibir tres hojas, copiar las filas y comparar referencias.">
-            <div class="sv-sheet-stack" aria-hidden="true"><div class="sv-sheet backsheet"></div><div class="sv-sheet midsheet"></div><div class="sv-sheet frontsheet"><b>Operaciones.xlsx</b><div class="sv-sheet-grid"></div></div></div>
-            <div class="sv-diagram-steps" aria-hidden="true"><span>Recibir</span><i>→</i><span>Copiar</span><i>→</i><span>Comparar</span></div>
-          </div>
+          <div class="walkthrough" aria-label="Secuencia ilustrada con datos ficticios">
+  <div class="walk-head"><span>Ejemplo animado</span><button type="button" class="walk-play" aria-label="Pausar el ejemplo">Pausar</button></div>
+  <div class="walk-frame" >
+    <span class="walk-kind">Entradas</span><h4>Tres hojas de operaciones</h4>
+    <dl><div><dt>operaciones-1.xlsx</dt><dd>3 filas</dd></div><div><dt>operaciones-2.xlsx</dt><dd>3 filas</dd></div><div><dt>operaciones-3.xlsx</dt><dd>3 filas</dd></div></dl>
+  </div>
+<div class="walk-frame" hidden>
+    <span class="walk-kind">Comparación</span><h4>¿Coincide la misma referencia?</h4>
+    <dl><div><dt>OP-102 · Archivo</dt><dd>80 € = 80 €</dd></div><div><dt>OP-103 · Mensajería</dt><dd>32 € ≠ 36 €</dd></div><div><dt>OP-107 · Inventario</dt><dd>Sin importe</dd></div></dl>
+  </div>
+<div class="walk-frame" hidden>
+    <span class="walk-kind">Resultado</span><h4>Un informe listo para revisar</h4>
+    <dl><div><dt>9 filas recibidas</dt><dd>8 consolidadas</dd></div><div><dt>Duplicado agrupado</dt><dd>1</dd></div><div><dt>Por revisar</dt><dd>1 diferencia · 1 dato</dd></div></dl>
+  </div>
+  <div class="walk-steps" role="group" aria-label="Pasos del ejemplo"><button type="button" aria-pressed="true">Recibir</button><button type="button" aria-pressed="false">Comparar</button><button type="button" aria-pressed="false">Consolidar</button></div>
+</div>
         </div>
         <p id="demo-report-status" class="sv-demo-status" role="status"></p>
         <div id="demo-report-results" hidden>
@@ -38,7 +50,22 @@
           <select id="demo-invoice-choice"><option value="fic-001">Factura FIC-001</option><option value="fic-002">Factura FIC-002</option></select>
           <button type="button" class="sv-demo-action" id="demo-invoice-run">Extraer los campos <span aria-hidden="true">→</span></button>
           <p class="sv-demo-note">Lectura local de PDF de texto con la estructura de estas muestras. <a id="demo-pdf-download" href="./demos/files/fic-001.pdf" download>Descargar PDF</a></p>
-        </div><div class="sv-invoice-preview"><img id="demo-pdf-preview" width="700" height="657" loading="lazy" src="./demos/files/fic-001.png" alt="Vista previa de la factura ficticia FIC-001"></div></div>
+        </div><div class="invoice-visual"><div class="walkthrough" aria-label="Secuencia ilustrada con datos ficticios">
+  <div class="walk-head"><span>Ejemplo animado</span><button type="button" class="walk-play" aria-label="Pausar el ejemplo">Pausar</button></div>
+  <div class="walk-frame" >
+    <span class="walk-kind">Documento</span><h4>Factura de muestra FIC-001</h4>
+    <dl><div><dt>Proveedor</dt><dd>Taller Nube</dd></div><div><dt>Concepto</dt><dd>Material de archivo</dd></div><div><dt>Total del PDF</dt><dd>145,20 €</dd></div></dl>
+  </div>
+<div class="walk-frame" hidden>
+    <span class="walk-kind">Extracción</span><h4>Del texto a campos separados</h4>
+    <dl><div><dt>Base imponible</dt><dd>120,00 €</dd></div><div><dt>IVA · 21 %</dt><dd>25,20 €</dd></div><div><dt>Importe total</dt><dd>145,20 €</dd></div></dl>
+  </div>
+<div class="walk-frame" hidden>
+    <span class="walk-kind">Resultado</span><h4>Una fila revisable y exportable</h4>
+    <dl><div><dt>Número</dt><dd>FIC-001</dd></div><div><dt>Fecha</dt><dd>12/03/2026</dd></div><div><dt>Total para el CSV</dt><dd>145,20 €</dd></div></dl>
+  </div>
+  <div class="walk-steps" role="group" aria-label="Pasos del ejemplo"><button type="button" aria-pressed="true">Leer</button><button type="button" aria-pressed="false">Extraer</button><button type="button" aria-pressed="false">Revisar</button></div>
+</div><details><summary>Ver la factura seleccionada</summary><div class="sv-invoice-preview"><img id="demo-pdf-preview" width="700" height="657" loading="lazy" src="./demos/files/fic-001.png" alt="Vista previa de la factura ficticia FIC-001"></div></details></div></div>
         <p id="demo-invoice-status" class="sv-demo-status" role="status"></p>
         <div id="demo-invoice-results" hidden><div class="sv-table-scroll" tabindex="0" role="region" aria-label="Campos extraídos y editables"><table><thead><tr><th>Campo</th><th>Valor editable</th></tr></thead><tbody></tbody></table></div><p class="sv-result-actions"><button id="demo-invoice-export" type="button">Exportar revisión CSV</button></p></div>
       </div>

@@ -1,5 +1,12 @@
 "use strict";
 
+const flowToggle = document.querySelector('.flow-toggle');
+flowToggle?.addEventListener('click', () => {
+  const paused = flowToggle.closest('figure').toggleAttribute('data-paused');
+  flowToggle.textContent = paused ? 'Reanudar' : 'Pausar';
+  flowToggle.setAttribute('aria-label', paused ? 'Reanudar el flujo animado' : 'Pausar el flujo animado');
+});
+
 document.documentElement.classList.add("js");
 
 const menu = document.getElementById("primary-nav");

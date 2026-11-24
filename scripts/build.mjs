@@ -22,6 +22,8 @@ await mkdir(path.join(output,'contact'));
 for (const name of ['contact.css','contact.js']) await cp('contact/'+name,path.join(output,'contact',name));
 
 let home = await read('index.html');
+const flow = await read('assets/architecture.svg');
+home = home.replace('<!--FLOW-->', () => flow);
 let contact = await read('contact/section.html');
 if (endpoint) contact = contact.replace('id="proposal"', `id="proposal" data-endpoint="${endpoint}"`);
 for (const [marker, html] of [['<!--DEMOS-->',await read('demos/section.html')],['<!--CONTACT-->',contact]]) {

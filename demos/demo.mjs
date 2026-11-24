@@ -122,3 +122,39 @@ $('demo-invoice-export').addEventListener('click',()=>{
   const inputs=Array.from(invoiceBody.querySelectorAll('input'));
   download('sysvark-'+choice.value+'.csv',[inputs.map(input=>input.getAttribute('aria-label')),inputs.map(input=>input.value)]);
 });
+const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
+for (const player of document.querySelectorAll('.walkthrough')) {
+  const frames = [...player.querySelectorAll('.walk-frame')];
+  const steps = [...player.querySelectorAll('.walk-steps button')];
+  const play = player.querySelector('.walk-play');
+  let current = 0;
+  let playing = !reducedMotion.matches;
+  let visible = false;
+  let timer;
+
+  function show(index) {
+    current = index;
+    frames.forEach((frame, i) => { frame.hidden = i !== index; });
+    steps.forEach((step, i) => step.setAttribute('aria-pressed', String(i === index)));
+  }
+  function schedule() {
+    clearInterval(timer);
+    play.textContent = playing ? 'Pausar' : 'Reproducir';
+    play.setAttribute('aria-label', play.textContent + ' el ejemplo');
+    if (playing && visible && !document.hidden)
+      timer = setInterval(() => show((current + 1) % frames.length), 3600);
+  }
+  steps.forEach((step, i) => step.addEventListener('click', () => {
+    playing = false;
+    show(i);
+    schedule();
+  }));
+  play.addEventListener('click', () => { playing = !playing; schedule(); });
+  reducedMotion.addEventListener('change', () => { playing = !reducedMotion.matches; schedule(); });
+  document.addEventListener('visibilitychange', schedule);
+  new IntersectionObserver(([entry]) => {
+    visible = entry.isIntersecting;
+    schedule();
+  }, {threshold:.2}).observe(player);
+  schedule();
+}
