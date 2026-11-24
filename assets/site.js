@@ -81,12 +81,13 @@ if (blueprint) {
   const layers = blueprint.querySelectorAll('.flow-layer');
   const labels = blueprint.querySelectorAll('.port-label');
   const motion = matchMedia('(prefers-reduced-motion: reduce)');
-  const examples = [
-    ['Hojas Excel','Facturas PDF','Correos','Informe','Registro ERP','Aviso'],
-    ['Pedidos web','Inventario','Albaranes','Stock al día','Envíos','Incidencias'],
-    ['Formulario','Buzón','CRM','Expediente','Asignación','Seguimiento']
+  const tools = [
+    ['googlesheets','Sheets'],['googledrive','Drive'],['gmail','Gmail'],
+    ['notion','Notion'],['airtable','Airtable'],['googlecalendar','Calendar'],
+    ['googleforms','Forms'],['github','GitHub'],['n8n','n8n']
   ];
-  let group = 0;
+  let change = 0;
+  let fade;
   let timer;
   let frame;
   let visible = false;
@@ -99,12 +100,23 @@ if (blueprint) {
   function queue() { if (visible && !frame) frame = requestAnimationFrame(compact); }
   function synchronize() {
     clearInterval(timer);
+    clearTimeout(fade);
+    blueprint.querySelectorAll(".fading").forEach(node => node.classList.remove("fading"));
     compact();
     if (visible && !document.hidden && !motion.matches) {
       timer = setInterval(() => {
-        group = (group + 1) % examples.length;
-        labels.forEach((label,i) => { label.textContent = examples[group][i]; });
-      }, 4800);
+        const index = change % labels.length;
+        const label = labels[index];
+        const node = label.parentElement;
+        const [icon, name] = tools[(index + 3 * (1 + Math.floor(change / labels.length))) % tools.length];
+        node.classList.add('fading');
+        fade = setTimeout(() => {
+          node.querySelector('image').setAttribute('href','/assets/logos/' + icon + '.svg');
+          label.textContent = name;
+          node.classList.remove('fading');
+          change++;
+        }, 440);
+      }, 1900);
     }
   }
   new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; synchronize(); }).observe(blueprint);

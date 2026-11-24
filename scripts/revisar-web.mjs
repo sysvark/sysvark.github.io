@@ -38,8 +38,13 @@ try {
   assert.match(await page.locator('#monthly-hours').innerText(),/52 h/);
   assert.match(await page.locator('#monthly-saved').innerText(),/26 h/);
   assert.match(await page.locator('#monthly-value').innerText(),/520,00/);
-  assert.equal(await page.locator('.scene:visible').count(),3);
-  assert.equal(await page.locator('#demostraciones input,#demostraciones button,.flow-toggle').count(),0);
+  assert.equal(await page.locator('.scene:visible').count(),1);
+  assert.equal(await page.locator('#demostraciones input[type=file]').count(),0);
+  assert.equal(await page.locator('.controls .calc-note').count(),1);
+  await page.getByRole('button',{name:'Flujo conectado',exact:true}).click();
+  await page.getByRole('button',{name:'Decidir',exact:true}).click();
+  assert.equal(await page.locator('.workflow .current b').innerText(),'Regla de stock');
+  await page.getByRole('button',{name:'Informes Excel',exact:true}).click();
   await page.emulateMedia({reducedMotion:'no-preference'});
   await page.evaluate(()=>window.scrollTo({top:0,behavior:'instant'}));
   await page.waitForFunction(()=>document.querySelector('.flow-layer').getAttribute('transform')==='translate(0 48)');
@@ -47,14 +52,18 @@ try {
   const before = await layer.getAttribute('transform');
   await page.evaluate(()=>window.scrollBy({top:document.querySelector('.blueprint').getBoundingClientRect().top-50,behavior:'instant'}));
   await page.waitForFunction(value=>document.querySelector('.flow-layer').getAttribute('transform')!==value,before);
+  const firstLabel = await page.locator('.port-label').first().textContent();
+  await page.waitForFunction(value=>document.querySelector('.port-label').textContent!==value, firstLabel);
   await page.locator('.demo-theater').scrollIntoViewIfNeeded();
-  for (const name of ['bills','inbox','sheets']) {
-    await page.locator('.scene.'+name+':visible').waitFor({timeout:26000});
+  for (const name of ['bills','inbox','workflow','sheets']) {
+    await page.locator('.scene.'+name+':visible').waitFor({timeout:33000});
   }
   await page.setViewportSize({width:1280,height:840});
   await page.emulateMedia({reducedMotion:'reduce'});
   await page.locator('.scene.sheets').screenshot({path:'docs/capturas/demostracion-informes.png'});
+  await page.getByRole('button',{name:'Facturas',exact:true}).click();
+  await page.getByRole('button',{name:'Preparar registro',exact:true}).click();
+  await page.locator('.scene.bills').screenshot({path:'docs/capturas/demostracion-factura.png'});
   assert.deepEqual(errors,[]);
-  console.log('Portada, tres tamaños, menú, calculadora, formulario inactivo, compactación y rotación de tres escenas correctas.');
+  console.log('Portada, tres tamaños, menú, calculadora, formulario inactivo, compactación y rotación de cuatro escenas correctas.');
 } finally { await browser.close(); server.close(); }
-

@@ -54,3 +54,4 @@ h3{font-size:1.32rem;letter-spacing:-.03em}.lead{max-width:43rem;margin-top:1rem
 .link-btn:hover{border-bottom-color:#203d48;color:#254f60}.blueprint>svg{aspect-ratio:600/330}
 
 .flow-packets{animation:deliver 2.4s linear infinite}@keyframes deliver{to{stroke-dashoffset:-109}}@media(prefers-reduced-motion:reduce){.flow-packets{animation:none}}
+.controls .calc-note{margin:.8rem 0 0;max-width:65ch;line-height:1.55}.founder-history{padding-block:clamp(2rem,4vw,4rem);border-top:1px solid var(--line)}.founder-history h2{font-size:clamp(1.7rem,3vw,2.4rem);letter-spacing:-.04em;margin:.4rem 0}.founder-history>p:last-child{max-width:65ch;line-height:1.65}.port-content{transition:opacity .42s ease-in-out}.port-content.fading{opacity:0}@media(prefers-reduced-motion:reduce){.port-content{transition:none}}

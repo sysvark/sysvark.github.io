@@ -1,6 +1,6 @@
 # SYSVARK
 
-Web en español de SYSVARK, proyecto español de automatización empresarial, integración de herramientas y desarrollo de software a medida fundado por Álvaro Sánchez Pérez. Incluye una presentación de los servicios, tres demostraciones animadas con ejemplos ficticios y una calculadora del coste del trabajo manual.
+Web en español de SYSVARK, proyecto español de automatización empresarial, integración de herramientas y desarrollo de software a medida fundado por Álvaro Sánchez Pérez. Incluye una presentación de los servicios, cuatro demostraciones animadas con ejemplos ficticios y una calculadora del coste del trabajo manual.
 
 ## Ejecutar y compilar
 
@@ -34,13 +34,13 @@ HTML semántico, CSS responsive, gráficos SVG, módulos JavaScript y un ensambl
 
 ### Cambiar contenidos y diseño
 
-Edita la sección correspondiente de `index.html`. Para añadir un servicio, replica un artículo dentro de Soluciones y ajusta su título, icono, texto y lista. Para una nueva demo, añade su panel en `demos/section.html`, usa la estructura de tres etapas y verifica su rotación en el navegador. Conserva los marcadores de ensamblado DEMOS y CONTACT. Los componentes comparten colores y tipografía en `assets/site.css`. Si cambias el logotipo, actualiza el maestro en `brand/`, las variantes de uso y los recursos de `assets/`. Sigue la guía de identidad.
+Edita la sección correspondiente de `index.html`. Para añadir un servicio, replica un artículo dentro de Soluciones y ajusta su título, icono, texto y lista. Para una nueva demo, añade su panel en `demos/section.html`, define sus etapas en el módulo de demostraciones y verifica su rotación en el navegador. Conserva los marcadores de ensamblado DEMOS y CONTACT. Los componentes comparten colores y tipografía en `assets/site.css`. Si cambias el logotipo, actualiza el maestro en `brand/`, las variantes de uso y los recursos de `assets/`. Sigue la guía de identidad.
 
 Para introducir otro idioma, conserva esta portada en la raíz y crea una ruta estática por idioma. Traduce etiquetas, validaciones y descripciones accesibles, actualiza `lang`, URLs canónicas, sitemap y enlaces de idioma antes de publicarla.
 
 ### Datos y contacto
 
-Las escenas ilustran la consolidación de hojas, la lectura de facturas y el reparto de solicitudes. Avanzan automáticamente con datos ficticios. El modo de movimiento reducido presenta las tres historias en lectura estática. La calculadora usa 52 semanas por año y 12 meses.
+Las escenas ilustran la consolidación de hojas, la lectura de facturas el reparto de solicitudes y un flujo de pedido conectado. Avanzan automáticamente con datos ficticios. El selector de ejemplo y los botones de etapa permiten recorrerlas manualmente. El modo de movimiento reducido desactiva el avance automático. La calculadora usa 52 semanas por año y 12 meses.
 
 El formulario se entrega desactivado. Para la futura captación, confirma primero la compatibilidad del alojamiento, completa la identidad del responsable y revisa el tratamiento con el proveedor. En la cuenta del titular crea un formulario de Formspree con destinatario verificado, configura su filtro de spam, acuerda la gestión de retención y actualiza la política de privacidad. Asigna el **endpoint público** de ese formulario a `FORMSPREE_ENDPOINT` al compilar. El workflow informativo omite la variable. Para activarla en un despliegue autorizado, configúrala como variable del repositorio y pásala explícitamente al paso de compilación. Comprueba con un mensaje ficticio tanto la respuesta del servicio como la llegada al buzón. Verifica también el caso sin conexión. La confirmación del servicio y la entrega al destinatario son comprobaciones distintas.
 
@@ -51,7 +51,7 @@ Las únicas variables son `SITE_URL` (origen HTTPS de la web, obtenido de Pages 
 1. En la cuenta dedicada, crea un repositorio público vacío llamado exactamente **usuario.github.io**, sustituyendo *usuario* por el nombre confirmado.
 2. En **Settings → Pages → Build and deployment**, selecciona **GitHub Actions**. Sube las fuentes a la rama `main` y consulta la ejecución **Publicar web en Pages** en Actions.
 3. La compilación instala desde el archivo de bloqueo, ejecuta las pruebas, integra secciones, comprueba los enlaces y sube únicamente `dist/`. El trabajo de despliegue recibe los permisos de escritura en Pages e identidad temporal. Si falla la compilación, el despliegue no se inicia.
-4. Comprueba la URL de entorno de la ejecución terminada, el certificado HTTPS, el 404, la compactación al desplazarse y el ciclo completo de las tres escenas. En **Settings → Pages**, verifica **Enforce HTTPS** cuando esté disponible. La URL del repositorio no es la URL de la web.
+4. Comprueba la URL de entorno de la ejecución terminada, el certificado HTTPS, el 404, la compactación al desplazarse y el ciclo completo de las cuatro escenas. En **Settings → Pages**, verifica **Enforce HTTPS** cuando esté disponible. La URL del repositorio no es la URL de la web.
 
 Las condiciones de Pages afectan al uso comercial. Mantén esta edición informativa mientras se resuelve la captación. Consulta las fuentes y decisiones en `docs/verificaciones.md`. Para migrar, configura `SITE_URL` con el nuevo origen, compila y sirve el contenido de `dist/` desde la raíz de un alojamiento estático con HTTPS. No se ha configurado un dominio propio.
 
@@ -62,4 +62,3 @@ Las condiciones de Pages afectan al uso comercial. Mantén esta edición informa
 - **Actions no despliega.** Comprueba el nombre del repositorio, que la rama sea `main`, la fuente GitHub Actions y la primera etapa fallida en el registro. Tras corregirla, reintenta la ejecución.
 - **El formulario está desactivado.** Es el estado inicial previsto. Una vez activado, revisa el endpoint, las cuotas, el filtro antispam y la verificación del destinatario si deja de recibir mensajes.
 - **Actualizar dependencias.** Revisa los avisos de seguridad y las versiones oficiales de PDF.js, JSZip y acciones de GitHub. Conserva las licencias. Repite pruebas de archivos, exportación, navegación y movimiento reducido después de actualizar. Las bibliotecas vendorizadas quedan fuera de npm audit.
-
