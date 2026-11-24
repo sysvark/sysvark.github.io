@@ -15,7 +15,7 @@ Identidad visual en `brand/` y `assets/`. El archivo `brand/GUIA.md` identifica 
 
 ## Cuentas, costes y estado operativo
 
-El titular confirmó el buzón Outlook de SYSVARK y el perfil github.com/sysvark. La cuenta de GitHub fue creada inicialmente con Gmail. Cambiar la dirección principal y retirar el acceso de Google, si existe, requiere comprobar el método alternativo de acceso. La configuración de 2FA, recuperación y recepción de mensajes de prueba sigue sin verificarse.
+El titular confirmó el buzón sysvark@outlook.com, el perfil github.com/sysvark y el cambio de correo en GitHub. Gestiona las opciones de seguridad y recuperación desde las cuentas dedicadas.
 
 El repositorio local contiene la configuración de publicación en GitHub Pages. Revisar la última ejecución de Actions y la URL pública para confirmar el despliegue. El formulario no está conectado a servicios externos en la edición entregada. Coste contratado para el proyecto: **0 €/mes**. Sin dominios comprados, suscripciones de pago ni medios de pago introducidos.
 
