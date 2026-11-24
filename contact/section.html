@@ -1,0 +1,21 @@
+<section id="contacto" class="contact-section" aria-labelledby="contact-title">
+  <div class="contact-layout">
+    <div><p class="contact-label">Contacto</p><h2 id="contact-title">Cuéntanos qué tarea te gustaría dejar de hacer manualmente.</h2><p id="contact-info">La recepción de propuestas está desactivada. Puedes explorar las demostraciones con datos ficticios.</p><a href="#demostraciones">Ver las demostraciones</a></div>
+    <form id="proposal" aria-describedby="contact-info" method="post">
+      <fieldset disabled><legend>Solicitud de propuesta</legend>
+        <div class="contact-fields">
+          <label>Nombre<input name="nombre" autocomplete="given-name" required maxlength="100"></label>
+          <label>Empresa<input name="empresa" autocomplete="organization" required maxlength="160"></label>
+          <label>Correo profesional<input name="email" type="email" autocomplete="email" required maxlength="254"></label>
+          <label>Teléfono (opcional)<input name="telefono" type="tel" autocomplete="tel" maxlength="35"></label>
+        </div>
+        <label>Proceso que quieres automatizar<textarea name="proceso" required minlength="10" maxlength="3000" rows="3"></textarea></label>
+        <label hidden>Deja vacío este campo<input name="_gotcha" tabindex="-1" autocomplete="off"></label>
+        <label class="consent"><input name="privacidad" type="checkbox" required value="aceptada">Acepto la política de privacidad.</label>
+        <button type="submit">Solicitar propuesta</button>
+      </fieldset>
+      <a href="./privacidad.html">Leer la política de privacidad</a>
+      <p role="status" id="send-status"></p>
+    </form>
+  </div>
+</section>
