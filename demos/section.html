@@ -2,13 +2,13 @@
 <div class="showcase-inner">
 <p class="eyebrow">Demostraciones</p><h2 id="demo-heading">De la tarea al resultado.</h2>
 <p class="showcase-intro">Cuatro procesos con datos ficticios. Elige un ejemplo o sigue el recorrido automático.</p>
-<div class="demo-theater"><div class="scene-picker" role="group" aria-label="Seleccionar demostración"><button type="button" aria-controls="example-sheets">Informes Excel</button><button type="button" aria-controls="example-bills">Facturas</button><button type="button" aria-controls="example-inbox">Solicitudes</button><button type="button" aria-controls="example-flow">Flujo conectado</button></div>
-<article id="example-sheets" class="scene sheets" data-stage="0">
+<div class="demo-theater"><div class="scene-picker" role="group" aria-label="Seleccionar demostración"><button type="button" aria-controls="example-sheets">Informes Excel</button><button type="button" aria-controls="example-bills">Facturas</button><button type="button" aria-controls="example-inbox">Seguimiento de envíos</button><button type="button" aria-controls="example-flow">Flujo conectado</button></div>
+<div class="scene-stack"><article id="example-sheets" class="scene sheets" data-stage="0">
 <header><small>Excel e informes</small><h3>El cierre mensual de tres tiendas.</h3><p>Cada tienda envía su Excel de ventas. Administración necesita reunir los tres archivos para cerrar el mes.</p></header>
 <div class="workbench" aria-label="Dos filas idénticas se consolidan y una diferencia queda marcada">
-<div class="sheet-pile"><small>Ventas de marzo</small><span>Norte.xlsx</span><span>Centro.xlsx</span><span>Sur.xlsx</span></div>
+<div class="sheet-pile"><small>Ventas de marzo</small><span>Norte.xlsx</span><span>Centro.xlsx</span><span>Sur.xlsx</span><b class="merged-sheet">Marzo.xlsx<small>3 archivos reunidos</small></b></div>
 <div class="transfer" aria-hidden="true"></div>
-<div class="ledger"><strong>Cierre de marzo</strong><dl><div><dt>OP-102 · 80 €</dt><dd class="good">Copia agrupada</dd></div><div><dt>OP-103 · 32 / 36 €</dt><dd class="review">Revisar</dd></div></dl></div></div>
+<div class="ledger"><strong>Cierre de marzo</strong><dl><div><dt>OP-102 · 80 €</dt><dd class="good">Copia agrupada</dd></div><div><dt>OP-103 · 32 / 36 €</dt><dd class="review"><span class="compare">Norte y Sur</span><span class="verdict">Revisar</span></dd></div></dl></div></div>
 <footer aria-label="Etapas del ejemplo"><button type="button">Reunir hojas</button><button type="button">Cruzar referencias</button><button type="button">Revisar diferencias</button></footer></article>
 <article id="example-bills" class="scene bills" data-stage="0">
 <header><small>Facturas y documentos</small><h3>Del papel al registro.</h3><p>El OCR lee los importes elegidos para contabilidad. La firma y la nota de entrega se conservan en el documento original.</p></header>
@@ -18,14 +18,14 @@
 <div class="ledger"><strong>Registro contable</strong><dl><div><dt>Base</dt><dd>120,00 €</dd></div><div><dt>IVA</dt><dd>25,20 €</dd></div><div><dt>Total</dt><dd>145,20 €</dd></div></dl></div></div>
 <footer aria-label="Etapas del ejemplo"><button type="button">Recibir factura</button><button type="button">Leer campos</button><button type="button">Preparar registro</button></footer></article>
 <article id="example-inbox" class="scene inbox" data-stage="0">
-<header><small>Seguimiento de solicitudes</small><h3>Un cliente pregunta por su envío.</h3><p>El cliente esperaba su paquete ayer. Su correo inicia una consulta de entrega.</p></header>
+<header><small>Atención posventa</small><h3>Un cliente pregunta por su envío.</h3><p>El cliente esperaba su paquete ayer. Su correo inicia una consulta de entrega.</p></header>
 <div class="workbench" aria-label="Una solicitud sobre un envío llega a la cola de logística">
 <div class="mail-card"><small>BANDEJA DE ENTRADA</small><b>¿Dónde está mi pedido?</b><span>«Tenía que llegar ayer. ¿Podéis comprobarlo?»</span></div>
 <div class="transfer" aria-hidden="true"></div>
-<div class="ledger queues"><strong>Seguimiento del envío</strong><dl><div><dt>Motivo</dt><dd>Retraso en la entrega</dd></div><div class="matched"><dt>Responsable</dt><dd>Logística</dd></div><div><dt>Respuesta al cliente</dt><dd class="good">«Estamos consultando tu envío»</dd></div></dl></div></div>
+<div class="ledger queues"><strong>Seguimiento del envío</strong><dl><div><dt>Motivo</dt><dd>Retraso en la entrega</dd></div><div class="matched"><dt>Responsable</dt><dd>Logística</dd></div><div><dt>Aviso de entrega</dt><dd class="good">«Tu paquete está en reparto. Llegará hoy entre las 16:00 y las 18:00.»</dd></div></dl></div></div>
 <footer aria-label="Etapas del ejemplo"><button type="button">Recibir correo</button><button type="button">Clasificar asunto</button><button type="button">Asignar y avisar</button></footer></article>
 <article id="example-flow" class="scene workflow" data-stage="0">
 <header><small>Integración de herramientas</small><h3>De la tienda a la confirmación.</h3><p>Una tienda pide dos cajas de aceite. El formulario pone en marcha la comprobación de existencias.</p></header>
-<div class="workbench" aria-label="Del pedido recibido a su confirmación"><div class="mail-card"><small>PEDIDO DE LA TIENDA</small><b>Dos cajas de aceite</b><span>Entrega en tienda</span></div><div class="transfer" aria-hidden="true"></div><div class="ledger"><strong>Seguimiento del pedido</strong><ol class="workflow-nodes"><li><img src="./assets/logos/googleforms.svg" alt=""><b>Formulario</b><span>2 cajas de aceite</span></li><li><img src="./assets/logos/airtable.svg" alt=""><b>Inventario</b><span>3 cajas en almacén</span></li><li><img src="./assets/logos/n8n.svg" alt=""><b>Regla de stock</b><span>3 disponibles ≥ 2 pedidas</span></li><li><img src="./assets/logos/googlesheets.svg" alt=""><b>Registro</b><span>2 cajas reservadas</span></li><li><img src="./assets/logos/gmail.svg" alt=""><b>Correo</b><span>Confirmación enviada</span></li></ol></div></div>
+<div class="workbench" aria-label="Del pedido recibido a su confirmación"><div class="mail-card"><small>PEDIDO DE LA TIENDA</small><b>Dos cajas de aceite</b><span>La tienda necesita reservar el producto antes de confirmar la entrega.</span></div><div class="transfer" aria-hidden="true"></div><div class="ledger"><strong>Seguimiento del pedido</strong><ol class="workflow-nodes"><li><img src="./assets/logos/googleforms.svg" alt=""><b>Formulario</b><span>2 cajas de aceite</span></li><li><img src="./assets/logos/airtable.svg" alt=""><b>Inventario</b><span>3 cajas en almacén</span></li><li><img src="./assets/logos/n8n.svg" alt=""><b>Regla de stock</b><span>3 disponibles ≥ 2 pedidas</span></li><li><img src="./assets/logos/googlesheets.svg" alt=""><b>Registro</b><span>2 cajas reservadas</span></li><li><img src="./assets/logos/gmail.svg" alt=""><b>Correo</b><span>Confirmación enviada</span></li></ol></div></div>
 <footer aria-label="Etapas del ejemplo"><button type="button">Recibir</button><button type="button">Consultar</button><button type="button">Decidir</button><button type="button">Registrar</button><button type="button">Notificar</button></footer></article>
-</div></div></section>
+</div></div></div></section>

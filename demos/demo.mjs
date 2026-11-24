@@ -9,19 +9,31 @@ let visible = false;
 let timer;
 
 const descriptions = [
-  ['Cada tienda envía su Excel de ventas. Administración necesita reunir los tres archivos para cerrar el mes.', 'El flujo compara los códigos de operación. La venta OP-102 figura en dos hojas con el mismo importe y se agrupa una sola vez.', 'OP-103 tiene dos importes distintos. El informe conserva ambos para que administración compruebe la diferencia.'],
+  ['Cada tienda envía su Excel de ventas. Administración necesita reunir los tres archivos para cerrar el mes.', 'Las tres hojas se reúnen en Marzo.xlsx y se cruzan por código. La venta OP-102 figura en dos hojas con el mismo importe y se agrupa una sola vez.', 'OP-103 tiene dos importes distintos. El informe conserva ambos para que administración compruebe la diferencia.'],
   ['Llega una factura con importes, una nota de entrega y una firma.', 'El OCR localiza la base, el IVA y el total. La firma y la nota de entrega quedan fuera de la extracción.', 'Los tres importes seleccionados pasan al registro contable, listos para su validación.'],
-  ['El cliente esperaba su paquete ayer. Su correo inicia una consulta de entrega.', 'El sistema reconoce una consulta sobre un envío retrasado y la asigna al equipo de logística.', 'El cliente recibe un acuse automático. Logística recibe la tarea de localizar el paquete y contestarle.'],
+  ['El cliente esperaba su paquete ayer. Su correo inicia una consulta de entrega.', 'El sistema reconoce una consulta sobre un envío retrasado y la asigna al equipo de logística.', 'El flujo consulta el seguimiento del transportista y envía al cliente la franja de entrega confirmada.'],
   ['Una tienda pide dos cajas de aceite. El formulario envía la solicitud al flujo.', 'El flujo consulta el inventario de aceite en Airtable. Quedan tres cajas.', 'n8n compara las dos cajas solicitadas con las tres disponibles. Hay existencias para atender el pedido.', 'La reserva de dos cajas se anota en la hoja de pedidos.', 'La tienda recibe por correo la confirmación de su reserva.']
 ];
+scenes.forEach((scene, index) => {
+  const paragraph = scene.querySelector('header p');
+  paragraph.replaceChildren(...descriptions[index].map(text => {
+    const span = document.createElement('span');
+    span.className = 'stage-copy';
+    span.textContent = text;
+    return span;
+  }));
+});
 function render() {
   scenes.forEach((scene, index) => {
     const active = example === index;
-    scene.hidden = !active;
+    scene.inert = !active;
+    scene.setAttribute('aria-hidden', String(!active));
     choices[index].setAttribute('aria-pressed', String(active));
     if (!active) return;
     scene.dataset.stage = String(stage);
-    scene.querySelector("header p").textContent = descriptions[index][stage];
+    scene.querySelectorAll(".stage-copy").forEach((copy, i) => {
+      copy.style.visibility = i === stage ? "visible" : "hidden";
+    });
     steps[index].forEach((button, i) => button.setAttribute('aria-pressed', String(stage === i)));
     scene.querySelectorAll('.workflow-nodes li').forEach((node,i) => {
       node.classList.toggle('reached', i <= stage);

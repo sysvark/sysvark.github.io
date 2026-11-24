@@ -8,7 +8,7 @@ const code = await readFile(new URL('../contact/contact.js',import.meta.url),'ut
 function fixture(endpoint, request) {
   const fields = {disabled:true}, status = {}, info = {};
   const form = {
-    dataset:{endpoint}, querySelector:()=>fields, reportValidity:()=>true,
+    action:endpoint, querySelector:()=>fields, reportValidity:()=>true,
     addEventListener(type, handler) { this[type] = handler; },
     reset() { this.wasReset = true; }
   };
@@ -20,17 +20,9 @@ function fixture(endpoint, request) {
   return {form,fields,status,elements,submit:()=>form.submit({preventDefault(){}})};
 }
 
-test('prepara un borrador con el destinatario y asunto sin transmitir datos',async()=>{
-  let called = false;
-  const view = fixture('',()=>{called=true;});
-  await view.submit();
-  assert.equal(view.fields.disabled,false);
-  assert.match(view.elements["open-draft"].href,/mailto:sysvark@outlook.com.*A%20%26%20B/);
-  assert.equal(called,false);
-});
 test('la confirmación requiere una respuesta positiva del proveedor',async()=>{
-  for (const result of [{ok:false,json:async()=>({})},{ok:true,json:async()=>({errors:['invalid']})},null]) {
-    const view = fixture('https://formspree.io/f/example',async()=>{
+  for (const result of [{ok:false,json:async()=>({})},{ok:true,json:async()=>({success:'false'})},null]) {
+    const view = fixture('https://formsubmit.co/ajax/prueba@example.com',async()=>{
       if (!result) throw new Error('offline');
       return result;
     });
@@ -42,13 +34,13 @@ test('la confirmación requiere una respuesta positiva del proveedor',async()=>{
 });
 test('bloquea el doble envío y confirma la recepción tras el acuse',async()=>{
   let finish, count=0;
-  const view = fixture('https://formspree.io/f/example',()=>{count++;return new Promise(resolve=>{finish=resolve;});});
+  const view = fixture('https://formsubmit.co/ajax/prueba@example.com',()=>{count++;return new Promise(resolve=>{finish=resolve;});});
   const first = view.submit();
   await view.submit();
   assert.equal(count,1);
   assert.equal(view.fields.disabled,true);
-  finish({ok:true,json:async()=>({ok:true})});
+  finish({ok:true,json:async()=>({success:"true"})});
   await first;
   assert.equal(view.form.wasReset,true);
-  assert.match(view.status.textContent,/ha confirmado/);
+  assert.match(view.status.textContent,/Mensaje enviado/);
 });

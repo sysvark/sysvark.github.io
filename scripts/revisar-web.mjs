@@ -32,12 +32,12 @@ try {
       assert.equal(await page.locator('.nav-toggle').getAttribute('aria-expanded'),'false');
     }
   }
+  await page.route('https://formsubmit.co/ajax/**', route => route.fulfill({json:{success:'true'}}));
   const contact = page.locator('#proposal');
   for (const [name,value] of Object.entries({nombre:'Prueba',empresa:'Empresa ficticia',email:'prueba@example.com',proceso:'Preparar el cierre mensual.'})) await contact.locator('[name='+name+']').fill(value);
   await contact.locator('[name=privacidad]').check();
   await contact.locator('[type=submit]').click();
-  assert.match(await page.locator('#open-draft').getAttribute('href'),/mailto:sysvark@outlook.com/);
-  assert.match(await page.locator('#draft-text').inputValue(),/Preparar el cierre mensual/);
+  await page.getByRole('status').filter({hasText:'Mensaje enviado'}).waitFor();
   await page.locator('#hours-number').fill('12');
   await page.locator('#rate-number').fill('20');
   await page.locator('#percent-number').fill('50');

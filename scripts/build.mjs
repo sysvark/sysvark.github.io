@@ -9,8 +9,6 @@ const base = new URL(process.env.SITE_URL || target);
 if (base.protocol !== 'https:' || base.username || base.password || base.search || base.hash || base.pathname !== '/') {
   throw new Error('SITE_URL debe ser el origen HTTPS del sitio web de usuario.');
 }
-const endpoint = process.env.FORMSPREE_ENDPOINT || '';
-if (endpoint && !/^https:\/\/formspree\.io\/f\/[a-zA-Z0-9]+$/.test(endpoint)) throw new Error('Endpoint de formulario inválido.');
 const read = file => readFile(file,'utf8');
 const output = path.join(root,'dist');
 await rm(output,{recursive:true,force:true});
@@ -26,7 +24,6 @@ let home = await read('index.html');
 const flow = await read('assets/architecture.svg');
 home = home.replace('<!--FLOW-->', () => flow);
 let contact = await read('contact/section.html');
-if (endpoint) contact = contact.replace('id="proposal"', `id="proposal" data-endpoint="${endpoint}"`);
 for (const [marker, html] of [['<!--DEMOS-->',await read('demos/section.html')],['<!--CONTACT-->',contact]]) {
   if (home.split(marker).length !== 2) throw new Error('Marcador ausente o repetido: ' + marker);
   home = home.replace(marker,()=>html);

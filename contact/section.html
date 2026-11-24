@@ -1,8 +1,8 @@
 <section id="contacto" class="contact-section" aria-labelledby="contact-title">
   <div class="contact-layout">
-    <div><p class="contact-label">Contacto</p><h2 id="contact-title">Cuéntanos qué tarea te gustaría dejar de hacer manualmente.</h2><p id="contact-info">Cuéntanos qué ocurre hoy y qué resultado buscas. Prepararemos un borrador para que puedas revisarlo y enviarlo desde tu correo.</p><a href="mailto:sysvark@outlook.com">sysvark@outlook.com</a></div>
-    <form id="proposal" aria-describedby="contact-info" method="post">
-      <fieldset disabled><legend>Solicitud de propuesta</legend>
+    <div><p class="contact-label">Contacto</p><h2 id="contact-title">Cuéntanos qué tarea te gustaría dejar de hacer manualmente.</h2><p id="contact-info">Cuéntanos qué ocurre hoy y qué resultado buscas. Te responderemos en la dirección que indiques.</p><a href="mailto:sysvark@outlook.com">sysvark@outlook.com</a></div>
+    <form id="proposal" action="https://formsubmit.co/ajax/sysvark@outlook.com" aria-describedby="contact-info" method="post">
+      <input type="hidden" name="_subject" value="Nueva consulta desde la web de SYSVARK"><fieldset disabled><legend>Solicitud de propuesta</legend>
         <div class="contact-fields">
           <label>Nombre<input name="nombre" autocomplete="given-name" required maxlength="100"></label>
           <label>Empresa<input name="empresa" autocomplete="organization" required maxlength="160"></label>
@@ -10,12 +10,11 @@
           <label>Teléfono (opcional)<input name="telefono" type="tel" autocomplete="tel" maxlength="35"></label>
         </div>
         <label>Proceso que quieres automatizar<textarea name="proceso" required minlength="10" maxlength="3000" rows="3"></textarea></label>
-        <label hidden>Deja vacío este campo<input name="_gotcha" tabindex="-1" autocomplete="off"></label>
+        <label hidden>Deja vacío este campo<input name="_honey" tabindex="-1" autocomplete="off"></label>
         <label class="consent"><input name="privacidad" type="checkbox" required value="aceptada">Acepto la política de privacidad.</label>
-        <button type="submit">Preparar correo</button>
+        <button type="submit">Enviar consulta</button>
       </fieldset>
       <a href="./privacidad.html">Leer la política de privacidad</a>
-      <div id="draft-actions" hidden><label>Tu mensaje<textarea id="draft-text" readonly rows="6"></textarea></label><a id="open-draft">Abrir en mi correo</a><button type="button" id="copy-draft">Copiar mensaje</button></div>
       <p role="status" id="send-status"></p>
     </form>
   </div>

@@ -93,12 +93,13 @@ if (blueprint) {
     "gmail": "Gmail",
     "googleforms": "Google Forms",
     "github": "GitHub",
+    "servicenow": "ServiceNow",
     "airtable": "Airtable",
     "notion": "Notion",
     "googlecalendar": "Google Calendar"
   };
   const sources = [['googlesheets','Filas'], ['googledrive','Archivos'], ['gmail','Consultas'],
-    ['googleforms','Solicitudes'], ['github','Incidencias'], ['airtable','Pedidos']];
+    ['googleforms','Solicitudes'], ['github','Código'], ['servicenow','Incidencias'], ['airtable','Pedidos']];
   const destinations = [['notion','Fichas'], ['airtable','Registros'], ['googlecalendar','Citas'],
     ['gmail','Respuestas'], ['googlesheets','Informes'], ['googledrive','Copias']];
   const pick = items => items[Math.floor(Math.random() * items.length)];
@@ -131,7 +132,7 @@ if (blueprint) {
         const [icon, role] = pick(available);
         node.classList.add('fading');
         fade = setTimeout(() => {
-          node.querySelector('image').setAttribute('href','/assets/logos/' + icon + '.svg');
+          node.querySelector('image').setAttribute('href','/assets/logos/' + icon + (icon === 'servicenow' ? '.ico' : '.svg'));
           label.textContent = toolNames[icon];
           node.querySelector('.port-role').textContent = role;
           node.classList.remove('fading');
