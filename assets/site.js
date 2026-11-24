@@ -32,7 +32,7 @@ if (mast) {
   let lastY = Math.max(0, scrollY);
   addEventListener('scroll', () => {
     const y = Math.max(0, scrollY);
-    if (Math.abs(y - lastY) < 6 && y > 0) return;
+    if (y === lastY) return;
     mast.classList.toggle('scrolled-down', y > mast.offsetHeight && y > lastY && !menu?.classList.contains('open'));
     lastY = y;
   }, {passive:true});
@@ -181,13 +181,29 @@ const details = new IntersectionObserver(entries => {
 }, {threshold:.2});
 document.querySelectorAll('.method-list li').forEach(item => details.observe(item));
 
+// A stationary pointer should not lift the cards passing underneath it.
+const services = document.querySelector('.service-grid');
+if (services) {
+  let hovered;
+  function setHovered(card) {
+    if (card === hovered) return;
+    hovered?.classList.remove('pointer-over');
+    hovered = card;
+    hovered?.classList.add('pointer-over');
+  }
+  services.addEventListener('pointermove', event => {
+    if (event.pointerType === 'mouse') setHovered(event.target.closest('.service-card'));
+  });
+  services.addEventListener('pointerleave', () => setHovered(null));
+  addEventListener('scroll', () => setHovered(null), {passive:true});
+}
+
 const gallery = document.querySelector('.experience-logos');
 if (gallery) {
   const logos = [...gallery.children];
 
   let visible = false;
   let timer;
-  let fade;
   function shuffled(items) {
     const result = [...items];
     for (let i=result.length-1;i>0;i--) {
@@ -201,22 +217,33 @@ if (gallery) {
   const reserve = initial.slice(3).map(item => item.firstElementChild);
   gallery.replaceChildren(...slots);
   logos.forEach(item => { const image = item.querySelector('img'); if (image) image.loading = 'eager'; });
-  function changeOne() {
+  let changing = false;
+  async function changeOne() {
+    if (changing) return;
+    changing = true;
     const slot = slots[Math.floor(Math.random() * slots.length)];
-    slot.classList.add('is-changing');
-    fade = setTimeout(() => {
-      const current = slot.firstElementChild;
-      const index = Math.floor(Math.random() * reserve.length);
-      const next = reserve[index];
-      current.replaceWith(next);
+    const index = Math.floor(Math.random() * reserve.length);
+    const current = slot.firstElementChild;
+    const incoming = reserve[index];
+    try {
+      await incoming.decode();
+      if (!visible || document.hidden || reducedMotion.matches) return;
+      slot.append(incoming);
+      const duration = 680;
+      const outgoingFade = current.animate([{opacity:.8},{opacity:0}], {duration,fill:'forwards'});
+      const incomingFade = incoming.animate([{opacity:0},{opacity:.8}], {duration,fill:'forwards'});
+      await Promise.all([outgoingFade.finished,incomingFade.finished]);
+      current.remove();
       reserve[index] = current;
-      slot.classList.remove('is-changing');
-    }, 580);
+      outgoingFade.cancel();
+      incomingFade.cancel();
+    } catch {
+      incoming.remove();
+    } finally { changing = false; }
   }
   function scheduleGallery() {
     clearInterval(timer);
-    clearTimeout(fade);
-    slots.forEach(slot => slot.classList.remove('is-changing'));
+
     if (!visible || document.hidden || reducedMotion.matches) return;
     timer = setInterval(changeOne, 3100);
   }

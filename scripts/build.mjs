@@ -1,5 +1,6 @@
 import {readFile, writeFile, cp, mkdir, rm, readdir, access} from 'node:fs/promises';
 import path from 'node:path';
+import {createHash} from 'node:crypto';
 import {fileURLToPath} from 'node:url';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
@@ -31,7 +32,12 @@ for (const [marker, html] of [['<!--DEMOS-->',await read('demos/section.html')],
 const website = {'@context':'https://schema.org','@type':'WebSite',name:'SYSVARK',url:base.href,inLanguage:'es-ES',description:'Automatización empresarial y software a medida para pymes en España.'};
 const includes = '<link rel="stylesheet" href="./contact/contact.css"><link rel="stylesheet" href="./demos/demo.css"><script type="module" src="./demos/demo.mjs"></script><script type="module" src="./contact/contact.js"></script>' +
   '<script type="application/ld+json">'+JSON.stringify(website)+'</script>';
-await emit('index.html',home.replace('</head>',includes+'</head>').replaceAll(target,base.href));
+home = home.replace('</head>',includes+'</head>').replaceAll(target,base.href);
+for (const [,file] of home.matchAll(/(?:src|href)="(\.\/[^"]+\.(?:css|m?js))"/g)) {
+  const version = createHash('sha256').update(await readFile(file)).digest('hex').slice(0,12);
+  home = home.replace('"'+file+'"','"'+file+'?v='+version+'"');
+}
+await emit('index.html',home);
 for (const page of ['aviso-legal','privacidad','404']) {
   await emit(page+'.html',(await read(page+'.html')).replaceAll(target,base.href));
 }

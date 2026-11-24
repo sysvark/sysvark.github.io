@@ -3,11 +3,11 @@
   font-family:"Segoe UI",Arial,Helvetica,sans-serif; color:var(--ink); background:var(--paper); line-height:1.55; scroll-behavior:smooth; scroll-padding-top:6rem;
 }
 *,*::before,*::after{box-sizing:border-box}
-body{margin:0}img,svg{max-width:100%}button,input,select,textarea{font:inherit}button{cursor:pointer}a{color:inherit}h1,h2,h3,p,figure,dl,dd{margin:0}
+body{margin:0;padding-top:83px}@media(max-width:760px){body{padding-top:67px}}img,svg{max-width:100%}button,input,select,textarea{font:inherit}button{cursor:pointer}a{color:inherit}h1,h2,h3,p,figure,dl,dd{margin:0}
 a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,summary:focus-visible,select:focus-visible,[tabindex]:focus-visible{outline:3px solid #22708d;outline-offset:4px}
 .wrap{width:min(1280px,90%);margin-inline:auto}
 .skip{position:fixed;top:.5rem;left:.5rem;z-index:20;background:white;padding:.7rem;transform:translateY(-180%)}.skip:focus{transform:none}
-.mast{position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);background:var(--paper)}
+.mast{position:fixed;inset:0 0 auto;z-index:100;border-bottom:1px solid var(--line);background:var(--paper)}
 .mast-inner{display:flex;align-items:center;justify-content:space-between;gap:2rem;min-height:82px}
 .word{display:flex;align-items:center}.word img{width:159px;height:auto}.mast nav{display:flex;align-items:center;gap:clamp(1.2rem,2.4vw,2.6rem)}
 .mast nav a{font-size:.92rem;font-weight:550;text-decoration:none}.mast nav a:hover,.footer a:hover{text-decoration:underline;text-underline-offset:4px}
@@ -70,7 +70,7 @@ h3{font-size:1.32rem;letter-spacing:-.03em}.lead{max-width:43rem;margin-top:1rem
 .experience-logos li[hidden]{display:none}
 .experience-logos img{width:min(100%,145px);height:52px;object-fit:contain}
 .experience-logos img,.port-content image{filter:grayscale(1);opacity:.8}
-.experience-logos li.is-changing{opacity:0;transform:translateY(3px)}
+.experience-logos li>img{grid-area:1/1}
 @media(prefers-reduced-motion:no-preference){
  .method-list li.in-view h3{animation:detail-enter .55s ease-out backwards}
  @keyframes detail-enter{from{transform:translateY(8px);opacity:.45}to{transform:none;opacity:1}}
@@ -91,7 +91,7 @@ h3{font-size:1.32rem;letter-spacing:-.03em}.lead{max-width:43rem;margin-top:1rem
  }
  @media(hover:hover) and (pointer:fine){
   .service-card{transition:translate .28s ease,box-shadow .28s ease}
-  .service-card:hover{translate:0 -4px;box-shadow:0 9px 22px -16px #284b56}
+  .service-card.pointer-over{translate:0 -4px;box-shadow:0 9px 22px -16px #284b56}
   .scene-picker button{transition:translate .2s ease,background-color .2s ease}
   .scene-picker button:hover{translate:0 -2px}
  }
@@ -100,7 +100,7 @@ h3{font-size:1.32rem;letter-spacing:-.03em}.lead{max-width:43rem;margin-top:1rem
 .mast{transition:transform .23s ease}
 .mast.scrolled-down:not(:has(:focus-visible)){transform:translateY(-101%)}
 .founder-history .experience-logos{max-width:60rem;margin:2.2rem 0 0;gap:clamp(.65rem,3vw,3rem)}
-.experience-logos .company-name{line-height:1;font-family:inherit;font-weight:650;font-size:clamp(1.7rem,3.8vw,2.4rem);letter-spacing:-.04em;color:#33484c}
+
 #soluciones .service-card{background:transparent;border-color:transparent;border-top-color:var(--line);border-radius:0}
-@media(hover:hover) and (pointer:fine){#soluciones .service-card:hover{background:#fff;border-color:var(--line);border-radius:10px}}
+@media(hover:hover) and (pointer:fine){#soluciones .service-card.pointer-over{background:#fff;border-color:var(--line);border-radius:10px}}
 @media(prefers-reduced-motion:reduce){.mast{transition:none}}

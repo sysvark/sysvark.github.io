@@ -48,3 +48,13 @@
 .sheets[data-stage="2"] .verdict{color:#884e4a}
 
 .scene footer button[aria-pressed=true]{background-image:linear-gradient(var(--accent),var(--accent));background-repeat:no-repeat;background-position:left bottom;background-size:0% 2px}
+
+/* Keep the link on the axis shared by both panels and the drawing itself. */
+@media(min-width:521px){.sheets .workbench{grid-template-columns:minmax(0,1fr) clamp(24px,4vw,48px) minmax(0,1fr)}}
+@media(max-width:520px){
+ .sheets .workbench{align-content:center;justify-items:stretch}
+ .sheets:not([data-stage="0"]) .sheet-pile{grid-template-rows:0 2.8rem 0;gap:0}
+ .sheets .sheet-pile{transition:grid-template-rows .85s ease,gap .85s ease}
+ .sheets:not([data-stage="0"]) .sheet-pile>span{transform:none}
+ .sheets .transfer{margin:0;justify-self:center}
+}
