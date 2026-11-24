@@ -1,74 +1,27 @@
-<section class="sv-lab" id="demostraciones" aria-labelledby="lab-heading">
-  <div class="sv-lab-inner">
-    <p class="sv-lab-kicker">Demostraciones</p>
-    <h2 id="lab-heading">Prueba la automatización.</h2>
-    <p class="sv-lab-intro">Explora dos procesos con datos ficticios. Cada ejemplo se ejecuta en tu navegador.</p>
-    <div class="sv-lab-box">
-      <div class="sv-lab-tabs" aria-label="Elige una demostración" role="group">
-        <button type="button" aria-pressed="true" aria-controls="demo-report" data-demo-mode="report">Informes Excel</button>
-        <button type="button" aria-pressed="false" aria-controls="demo-invoice" data-demo-mode="invoice">Facturas PDF</button>
-      </div>
-      <div id="demo-report" class="sv-lab-pane">
-        <div class="sv-lab-grid">
-          <div class="sv-demo-copy">
-            <h3>Tres archivos, un informe.</h3>
-            <p>En lugar de copiar filas entre hojas, reúne las operaciones por referencia y descubre cuáles necesitan revisión.</p>
-            <button type="button" class="sv-demo-action" id="demo-sample">Usar datos de ejemplo <span aria-hidden="true">→</span></button>
-            <details class="sv-demo-upload"><summary>Probar con mis archivos</summary>
-              <p>Usa exclusivamente datos ficticios o no confidenciales. Elige tres libros XLSX de una sola hoja, de hasta 256 KiB y 300 registros cada uno. Conserva las tres columnas del ejemplo.</p>
-              <label id="demo-drop">Arrastra tres archivos aquí o selecciónalos<input id="demo-input" type="file" accept=".xlsx" multiple></label>
-              <p>Descarga las plantillas ficticias <a download href="./demos/files/operaciones-1.xlsx">Excel 1</a> · <a download href="./demos/files/operaciones-2.xlsx">Excel 2</a> · <a download href="./demos/files/operaciones-3.xlsx">Excel 3</a></p>
-            </details>
-          </div>
-          <div class="walkthrough" aria-label="Secuencia ilustrada con datos ficticios">
-  <div class="walk-head"><span>Ejemplo animado</span><button type="button" class="walk-play" aria-label="Pausar el ejemplo">Pausar</button></div>
-  <div class="walk-frame" >
-    <span class="walk-kind">Entradas</span><h4>Tres hojas de operaciones</h4>
-    <dl><div><dt>operaciones-1.xlsx</dt><dd>3 filas</dd></div><div><dt>operaciones-2.xlsx</dt><dd>3 filas</dd></div><div><dt>operaciones-3.xlsx</dt><dd>3 filas</dd></div></dl>
-  </div>
-<div class="walk-frame" hidden>
-    <span class="walk-kind">Comparación</span><h4>¿Coincide la misma referencia?</h4>
-    <dl><div><dt>OP-102 · Archivo</dt><dd>80 € = 80 €</dd></div><div><dt>OP-103 · Mensajería</dt><dd>32 € ≠ 36 €</dd></div><div><dt>OP-107 · Inventario</dt><dd>Sin importe</dd></div></dl>
-  </div>
-<div class="walk-frame" hidden>
-    <span class="walk-kind">Resultado</span><h4>Un informe listo para revisar</h4>
-    <dl><div><dt>9 filas recibidas</dt><dd>8 consolidadas</dd></div><div><dt>Duplicado agrupado</dt><dd>1</dd></div><div><dt>Por revisar</dt><dd>1 diferencia · 1 dato</dd></div></dl>
-  </div>
-  <div class="walk-steps" role="group" aria-label="Pasos del ejemplo"><button type="button" aria-pressed="true">Recibir</button><button type="button" aria-pressed="false">Comparar</button><button type="button" aria-pressed="false">Consolidar</button></div>
-</div>
-        </div>
-        <p id="demo-report-status" class="sv-demo-status" role="status"></p>
-        <div id="demo-report-results" hidden>
-          <div class="sv-table-scroll" tabindex="0" role="region" aria-label="Informe de operaciones"><table><thead><tr><th>Referencia</th><th>Concepto</th><th>Importe (€)</th><th>Origen</th><th>Revisión</th></tr></thead><tbody></tbody></table></div>
-          <p class="sv-result-actions"><button type="button" id="demo-report-export">Descargar informe CSV</button><button type="button" id="demo-reset">Reiniciar</button></p>
-        </div>
-      </div>
-      <div id="demo-invoice" class="sv-lab-pane" hidden>
-        <div class="sv-lab-grid"><div class="sv-demo-copy">
-          <h3>Del PDF a la tabla.</h3><p>Leer facturas y transcribir sus importes lleva varias pasadas. Elige una factura ficticia para extraer su texto, revisar los campos y exportarlos.</p>
-          <label for="demo-invoice-choice">Documento de ejemplo</label>
-          <select id="demo-invoice-choice"><option value="fic-001">Factura FIC-001</option><option value="fic-002">Factura FIC-002</option></select>
-          <button type="button" class="sv-demo-action" id="demo-invoice-run">Extraer los campos <span aria-hidden="true">→</span></button>
-          <p class="sv-demo-note">Lectura local de PDF de texto con la estructura de estas muestras. <a id="demo-pdf-download" href="./demos/files/fic-001.pdf" download>Descargar PDF</a></p>
-        </div><div class="invoice-visual"><div class="walkthrough" aria-label="Secuencia ilustrada con datos ficticios">
-  <div class="walk-head"><span>Ejemplo animado</span><button type="button" class="walk-play" aria-label="Pausar el ejemplo">Pausar</button></div>
-  <div class="walk-frame" >
-    <span class="walk-kind">Documento</span><h4>Factura de muestra FIC-001</h4>
-    <dl><div><dt>Proveedor</dt><dd>Taller Nube</dd></div><div><dt>Concepto</dt><dd>Material de archivo</dd></div><div><dt>Total del PDF</dt><dd>145,20 €</dd></div></dl>
-  </div>
-<div class="walk-frame" hidden>
-    <span class="walk-kind">Extracción</span><h4>Del texto a campos separados</h4>
-    <dl><div><dt>Base imponible</dt><dd>120,00 €</dd></div><div><dt>IVA · 21 %</dt><dd>25,20 €</dd></div><div><dt>Importe total</dt><dd>145,20 €</dd></div></dl>
-  </div>
-<div class="walk-frame" hidden>
-    <span class="walk-kind">Resultado</span><h4>Una fila revisable y exportable</h4>
-    <dl><div><dt>Número</dt><dd>FIC-001</dd></div><div><dt>Fecha</dt><dd>12/03/2026</dd></div><div><dt>Total para el CSV</dt><dd>145,20 €</dd></div></dl>
-  </div>
-  <div class="walk-steps" role="group" aria-label="Pasos del ejemplo"><button type="button" aria-pressed="true">Leer</button><button type="button" aria-pressed="false">Extraer</button><button type="button" aria-pressed="false">Revisar</button></div>
-</div><details><summary>Ver la factura seleccionada</summary><div class="sv-invoice-preview"><img id="demo-pdf-preview" width="700" height="657" loading="lazy" src="./demos/files/fic-001.png" alt="Vista previa de la factura ficticia FIC-001"></div></details></div></div>
-        <p id="demo-invoice-status" class="sv-demo-status" role="status"></p>
-        <div id="demo-invoice-results" hidden><div class="sv-table-scroll" tabindex="0" role="region" aria-label="Campos extraídos y editables"><table><thead><tr><th>Campo</th><th>Valor editable</th></tr></thead><tbody></tbody></table></div><p class="sv-result-actions"><button id="demo-invoice-export" type="button">Exportar revisión CSV</button></p></div>
-      </div>
-    </div>
-  </div>
-</section>
+<section class="showcase" id="demostraciones" aria-labelledby="demo-heading">
+<div class="showcase-inner">
+<p class="eyebrow">Demostraciones</p><h2 id="demo-heading">De la tarea al resultado.</h2>
+<p class="showcase-intro">Tres ejemplos animados con datos ficticios.</p>
+<div class="demo-theater">
+<article class="scene sheets" data-stage="0">
+<header><small>Excel e informes</small><h3>Tres hojas, un cierre.</h3><p>Un mismo pedido aparece en dos archivos. El informe agrupa la copia y señala los importes que necesitan revisión.</p></header>
+<div class="workbench" aria-label="Dos filas idénticas se consolidan y una diferencia queda marcada">
+<div class="sheet-pile"><span>Norte.xlsx</span><span>Centro.xlsx</span><span>Sur.xlsx</span></div>
+<div class="transfer" aria-hidden="true"></div>
+<div class="ledger"><strong>Informe consolidado</strong><dl><div><dt>OP-102 · 80 €</dt><dd class="good">Copia agrupada</dd></div><div><dt>OP-103 · 32 / 36 €</dt><dd class="review">Revisar</dd></div></dl></div></div>
+<footer><span>Reunir hojas</span><span>Cruzar referencias</span><span>Revisar diferencias</span></footer></article>
+<article class="scene bills" data-stage="0">
+<header><small>Facturas y documentos</small><h3>Del papel al registro.</h3><p>El número de factura y los importes pasan del documento a campos separados, listos para una revisión humana.</p></header>
+<div class="workbench" aria-label="Una línea recorre la factura y los valores aparecen en el registro">
+<div class="bill-paper"><small>FACTURA</small><b>FIC-001</b><div>Material de archivo</div><hr><strong>145,20 €</strong><i aria-hidden="true"></i></div>
+<div class="transfer" aria-hidden="true"></div>
+<div class="ledger"><strong>Registro contable</strong><dl><div><dt>Base</dt><dd>120,00 €</dd></div><div><dt>IVA</dt><dd>25,20 €</dd></div><div><dt>Total</dt><dd>145,20 €</dd></div></dl></div></div>
+<footer><span>Recibir factura</span><span>Leer campos</span><span>Preparar registro</span></footer></article>
+<article class="scene inbox" data-stage="0">
+<header><small>Seguimiento de solicitudes</small><h3>Del buzón al responsable.</h3><p>Una regla reconoce una incidencia de entrega, la asigna a logística y deja un aviso para su seguimiento.</p></header>
+<div class="workbench" aria-label="Una solicitud sobre un envío llega a la cola de logística">
+<div class="mail-card"><small>BANDEJA DE ENTRADA</small><b>¿Dónde está mi pedido?</b><span>Pedido #418</span></div>
+<div class="transfer" aria-hidden="true"></div>
+<div class="ledger queues"><strong>Asignación por asunto</strong><dl><div><dt>Facturación</dt><dd>—</dd></div><div class="matched"><dt>Logística</dt><dd>#418</dd></div><div><dt>Aviso de seguimiento</dt><dd class="good">Creado</dd></div></dl></div></div>
+<footer><span>Recibir correo</span><span>Clasificar asunto</span><span>Asignar y avisar</span></footer></article>
+</div></div></section>

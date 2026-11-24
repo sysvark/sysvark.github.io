@@ -1,11 +1,6 @@
 "use strict";
 
-const flowToggle = document.querySelector('.flow-toggle');
-flowToggle?.addEventListener('click', () => {
-  const paused = flowToggle.closest('figure').toggleAttribute('data-paused');
-  flowToggle.textContent = paused ? 'Reanudar' : 'Pausar';
-  flowToggle.setAttribute('aria-label', paused ? 'Reanudar el flujo animado' : 'Pausar el flujo animado');
-});
+
 
 document.documentElement.classList.add("js");
 
@@ -79,4 +74,42 @@ if (ranges.every(Boolean)) {
     });
   });
   displayEstimate();
+}
+
+const blueprint = document.querySelector('.blueprint');
+if (blueprint) {
+  const layers = blueprint.querySelectorAll('.flow-layer');
+  const labels = blueprint.querySelectorAll('.port-label');
+  const motion = matchMedia('(prefers-reduced-motion: reduce)');
+  const examples = [
+    ['Hojas Excel','Facturas PDF','Correos','Informe','Registro ERP','Aviso'],
+    ['Pedidos web','Inventario','Albaranes','Stock al día','Envíos','Incidencias'],
+    ['Formulario','Buzón','CRM','Expediente','Asignación','Seguimiento']
+  ];
+  let group = 0;
+  let timer;
+  let frame;
+  let visible = false;
+  function compact() {
+    frame = null;
+    const rect = blueprint.getBoundingClientRect();
+    const progress = motion.matches ? 0 : Math.min(1, Math.max(0, (innerHeight * .42 - rect.top) / (rect.height * .95)));
+    layers.forEach(layer => layer.setAttribute('transform', 'translate(0 ' + Number(layer.dataset.offset) * (1 - .7 * progress) + ')'));
+  }
+  function queue() { if (visible && !frame) frame = requestAnimationFrame(compact); }
+  function synchronize() {
+    clearInterval(timer);
+    compact();
+    if (visible && !document.hidden && !motion.matches) {
+      timer = setInterval(() => {
+        group = (group + 1) % examples.length;
+        labels.forEach((label,i) => { label.textContent = examples[group][i]; });
+      }, 4800);
+    }
+  }
+  new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; synchronize(); }).observe(blueprint);
+  addEventListener('scroll',queue,{passive:true});
+  addEventListener('resize',queue);
+  motion.addEventListener('change', synchronize);
+  document.addEventListener('visibilitychange', synchronize);
 }

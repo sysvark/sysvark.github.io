@@ -38,20 +38,23 @@ try {
   assert.match(await page.locator('#monthly-hours').innerText(),/52 h/);
   assert.match(await page.locator('#monthly-saved').innerText(),/26 h/);
   assert.match(await page.locator('#monthly-value').innerText(),/520,00/);
-  await page.locator('#demo-sample').click();
-  await page.locator('#demo-report-results:visible').waitFor();
+  assert.equal(await page.locator('.scene:visible').count(),3);
+  assert.equal(await page.locator('#demostraciones input,#demostraciones button,.flow-toggle').count(),0);
   await page.emulateMedia({reducedMotion:'no-preference'});
-  const walkthrough = page.locator('#demo-report .walkthrough');
-  await walkthrough.scrollIntoViewIfNeeded();
-  await walkthrough.getByRole('button',{name:'Comparar',exact:true}).and(page.locator('[aria-pressed=true]')).waitFor({timeout:10000});
-  await walkthrough.getByRole('button',{name:'Consolidar',exact:true}).click();
-  assert.equal(await walkthrough.getByRole('button',{name:'Reproducir el ejemplo'}).isVisible(),true);
-  await page.locator('.flow-toggle').click();
-  assert.equal(await page.locator('.blueprint .signal path').first().evaluate(path=>getComputedStyle(path).animationPlayState),'paused');
-  await page.locator('[data-demo-mode=invoice]').click();
-  await page.locator('#demo-invoice-run').click();
-  await page.locator('#demo-invoice-results:visible').waitFor();
-  assert.equal(await page.getByLabel('Importe total').inputValue(),'145,20 EUR');
+  await page.evaluate(()=>window.scrollTo({top:0,behavior:'instant'}));
+  await page.waitForFunction(()=>document.querySelector('.flow-layer').getAttribute('transform')==='translate(0 48)');
+  const layer = page.locator('.flow-layer').first();
+  const before = await layer.getAttribute('transform');
+  await page.evaluate(()=>window.scrollBy({top:document.querySelector('.blueprint').getBoundingClientRect().top-50,behavior:'instant'}));
+  await page.waitForFunction(value=>document.querySelector('.flow-layer').getAttribute('transform')!==value,before);
+  await page.locator('.demo-theater').scrollIntoViewIfNeeded();
+  for (const name of ['bills','inbox','sheets']) {
+    await page.locator('.scene.'+name+':visible').waitFor({timeout:26000});
+  }
+  await page.setViewportSize({width:1280,height:840});
+  await page.emulateMedia({reducedMotion:'reduce'});
+  await page.locator('.scene.sheets').screenshot({path:'docs/capturas/demostracion-informes.png'});
   assert.deepEqual(errors,[]);
-  console.log('Portada, tres tamaños, menú, calculadora, formulario inactivo, Excel y PDF correctos.');
+  console.log('Portada, tres tamaños, menú, calculadora, formulario inactivo, compactación y rotación de tres escenas correctas.');
 } finally { await browser.close(); server.close(); }
+

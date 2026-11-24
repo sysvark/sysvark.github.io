@@ -17,7 +17,8 @@ await rm(output,{recursive:true,force:true});
 await mkdir(output);
 const emit = (file, data) => writeFile(path.join(output,file),data);
 await cp('assets',path.join(output,'assets'),{recursive:true});
-await cp('demos',path.join(output,'demos'),{recursive:true,filter:src=> !/(?:^|[\\/])(?:section\.html|tests?|scripts|.*\.test\.mjs|README\.md)$/.test(src)});
+await mkdir(path.join(output,'demos'));
+for (const file of ['demo.css','demo.mjs']) await cp('demos/'+file,path.join(output,'demos',file));
 await mkdir(path.join(output,'contact'));
 for (const name of ['contact.css','contact.js']) await cp('contact/'+name,path.join(output,'contact',name));
 
@@ -55,3 +56,4 @@ for (const name of (await readdir(output)).filter(name=>name.endsWith('.html')))
   }
 }
 console.log('Exportación estática y enlaces verificados en dist/.');
+
