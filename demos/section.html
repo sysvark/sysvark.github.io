@@ -1,0 +1,47 @@
+<section class="sv-lab" id="demostraciones" aria-labelledby="lab-heading">
+  <div class="sv-lab-inner">
+    <p class="sv-lab-kicker">Demostraciones</p>
+    <h2 id="lab-heading">Prueba la automatización.</h2>
+    <p class="sv-lab-intro">Explora dos procesos con datos ficticios. Cada ejemplo se ejecuta en tu navegador.</p>
+    <div class="sv-lab-box">
+      <div class="sv-lab-tabs" aria-label="Elige una demostración" role="group">
+        <button type="button" aria-pressed="true" aria-controls="demo-report" data-demo-mode="report">Informes Excel</button>
+        <button type="button" aria-pressed="false" aria-controls="demo-invoice" data-demo-mode="invoice">Facturas PDF</button>
+      </div>
+      <div id="demo-report" class="sv-lab-pane">
+        <div class="sv-lab-grid">
+          <div class="sv-demo-copy">
+            <h3>Tres archivos, un informe.</h3>
+            <p>En lugar de copiar filas entre hojas, reúne las operaciones por referencia y descubre cuáles necesitan revisión.</p>
+            <button type="button" class="sv-demo-action" id="demo-sample">Usar datos de ejemplo <span aria-hidden="true">→</span></button>
+            <details class="sv-demo-upload"><summary>Probar con mis archivos</summary>
+              <p>Usa exclusivamente datos ficticios o no confidenciales. Elige tres libros XLSX de una sola hoja, de hasta 256 KiB y 300 registros cada uno. Conserva las tres columnas del ejemplo.</p>
+              <label id="demo-drop">Arrastra tres archivos aquí o selecciónalos<input id="demo-input" type="file" accept=".xlsx" multiple></label>
+              <p>Descarga las plantillas ficticias <a download href="./demos/files/operaciones-1.xlsx">Excel 1</a> · <a download href="./demos/files/operaciones-2.xlsx">Excel 2</a> · <a download href="./demos/files/operaciones-3.xlsx">Excel 3</a></p>
+            </details>
+          </div>
+          <div class="sv-demo-diagram" role="img" aria-label="Proceso manual: recibir tres hojas, copiar las filas y comparar referencias.">
+            <div class="sv-sheet-stack" aria-hidden="true"><div class="sv-sheet backsheet"></div><div class="sv-sheet midsheet"></div><div class="sv-sheet frontsheet"><b>Operaciones.xlsx</b><div class="sv-sheet-grid"></div></div></div>
+            <div class="sv-diagram-steps" aria-hidden="true"><span>Recibir</span><i>→</i><span>Copiar</span><i>→</i><span>Comparar</span></div>
+          </div>
+        </div>
+        <p id="demo-report-status" class="sv-demo-status" role="status"></p>
+        <div id="demo-report-results" hidden>
+          <div class="sv-table-scroll" tabindex="0" role="region" aria-label="Informe de operaciones"><table><thead><tr><th>Referencia</th><th>Concepto</th><th>Importe (€)</th><th>Origen</th><th>Revisión</th></tr></thead><tbody></tbody></table></div>
+          <p class="sv-result-actions"><button type="button" id="demo-report-export">Descargar informe CSV</button><button type="button" id="demo-reset">Reiniciar</button></p>
+        </div>
+      </div>
+      <div id="demo-invoice" class="sv-lab-pane" hidden>
+        <div class="sv-lab-grid"><div class="sv-demo-copy">
+          <h3>Del PDF a la tabla.</h3><p>Leer facturas y transcribir sus importes lleva varias pasadas. Elige una factura ficticia para extraer su texto, revisar los campos y exportarlos.</p>
+          <label for="demo-invoice-choice">Documento de ejemplo</label>
+          <select id="demo-invoice-choice"><option value="fic-001">Factura FIC-001</option><option value="fic-002">Factura FIC-002</option></select>
+          <button type="button" class="sv-demo-action" id="demo-invoice-run">Extraer los campos <span aria-hidden="true">→</span></button>
+          <p class="sv-demo-note">Lectura local de PDF de texto con la estructura de estas muestras. <a id="demo-pdf-download" href="./demos/files/fic-001.pdf" download>Descargar PDF</a></p>
+        </div><div class="sv-invoice-preview"><img id="demo-pdf-preview" width="700" height="657" loading="lazy" src="./demos/files/fic-001.png" alt="Vista previa de la factura ficticia FIC-001"></div></div>
+        <p id="demo-invoice-status" class="sv-demo-status" role="status"></p>
+        <div id="demo-invoice-results" hidden><div class="sv-table-scroll" tabindex="0" role="region" aria-label="Campos extraídos y editables"><table><thead><tr><th>Campo</th><th>Valor editable</th></tr></thead><tbody></tbody></table></div><p class="sv-result-actions"><button id="demo-invoice-export" type="button">Exportar revisión CSV</button></p></div>
+      </div>
+    </div>
+  </div>
+</section>

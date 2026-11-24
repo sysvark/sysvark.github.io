@@ -28,7 +28,9 @@ for (const [marker, html] of [['<!--DEMOS-->',await read('demos/section.html')],
   if (home.split(marker).length !== 2) throw new Error('Marcador ausente o repetido: ' + marker);
   home = home.replace(marker,()=>html);
 }
-const includes = '<link rel="stylesheet" href="./contact/contact.css"><link rel="stylesheet" href="./demos/demo.css"><script type="module" src="./demos/demo.mjs"></script><script type="module" src="./contact/contact.js"></script>';
+const website = {'@context':'https://schema.org','@type':'WebSite',name:'SYSVARK',url:base.href,inLanguage:'es-ES',description:'Automatización empresarial y software a medida para pymes en España.'};
+const includes = '<link rel="stylesheet" href="./contact/contact.css"><link rel="stylesheet" href="./demos/demo.css"><script type="module" src="./demos/demo.mjs"></script><script type="module" src="./contact/contact.js"></script>' +
+  '<script type="application/ld+json">'+JSON.stringify(website)+'</script>';
 await emit('index.html',home.replace('</head>',includes+'</head>').replaceAll(target,base.href));
 for (const page of ['aviso-legal','privacidad','404']) {
   await emit(page+'.html',(await read(page+'.html')).replaceAll(target,base.href));
