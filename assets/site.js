@@ -87,6 +87,16 @@ if (blueprint) {
   const layers = blueprint.querySelectorAll('.flow-layer');
   const labels = blueprint.querySelectorAll('.port-label');
   const motion = matchMedia('(prefers-reduced-motion: reduce)');
+  const toolNames = {
+    "googlesheets": "Google Sheets",
+    "googledrive": "Google Drive",
+    "gmail": "Gmail",
+    "googleforms": "Google Forms",
+    "github": "GitHub",
+    "airtable": "Airtable",
+    "notion": "Notion",
+    "googlecalendar": "Google Calendar"
+  };
   const sources = [['googlesheets','Filas'], ['googledrive','Archivos'], ['gmail','Consultas'],
     ['googleforms','Solicitudes'], ['github','Incidencias'], ['airtable','Pedidos']];
   const destinations = [['notion','Fichas'], ['airtable','Registros'], ['googlecalendar','Citas'],
@@ -118,11 +128,12 @@ if (blueprint) {
         if (!options.length) return;
         const {label, available} = pick(options);
         const node = label.parentElement;
-        const [icon, name] = pick(available);
+        const [icon, role] = pick(available);
         node.classList.add('fading');
         fade = setTimeout(() => {
           node.querySelector('image').setAttribute('href','/assets/logos/' + icon + '.svg');
-          label.textContent = name;
+          label.textContent = toolNames[icon];
+          node.querySelector('.port-role').textContent = role;
           node.classList.remove('fading');
           node.dataset.icon = icon;
           previousNode = label;
