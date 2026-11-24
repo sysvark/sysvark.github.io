@@ -24,6 +24,6 @@ Para el README del perfil, crea un repositorio público con el mismo nombre que 
 > # SYSVARK
 > Sistemas conectados. Negocios eficientes.
 >
-> Proyecto tecnológico español fundado por Álvaro Sánchez Pérez. Desarrollamos automatizaciones, integraciones y software para operaciones empresariales. Nuestra web incluye demostraciones de consolidación de hojas Excel y lectura local de facturas PDF de ejemplo.
+> Automatización de procesos, integración de herramientas y software a medida para pymes en España. Nuestra web incluye demostraciones de consolidación de hojas Excel y lectura local de facturas PDF de ejemplo.
 
 El repositorio del perfil es distinto del repositorio de la web. El de Pages lleva el sufijo `.github.io`.

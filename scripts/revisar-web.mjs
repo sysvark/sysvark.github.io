@@ -15,7 +15,7 @@ try {
   await mkdir('docs/capturas',{recursive:true});
   for (const [width,height] of [[1440,900],[768,1024],[390,844]]) {
     await page.setViewportSize({width,height});
-    await page.goto('http://127.0.0.1:'+server.address().port+'/',{waitUntil:'networkidle'});
+    await page.goto(process.env.REVISAR_PAGES === '1' ? 'https://sysvark.github.io/' : 'http://127.0.0.1:'+server.address().port+'/',{waitUntil:'networkidle'});
     assert.equal(await page.locator('#proposal button[type=submit]').isDisabled(),true);
     assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth <= innerWidth));
     await page.screenshot({path:'docs/capturas/inicio-'+width+'.png'});
