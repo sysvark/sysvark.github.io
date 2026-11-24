@@ -54,7 +54,7 @@ h3{font-size:1.32rem;letter-spacing:-.03em}.lead{max-width:43rem;margin-top:1rem
 .link-btn:hover{border-bottom-color:#203d48;color:#254f60}.blueprint>svg{aspect-ratio:600/330}
 
 .flow-packets{animation:deliver 2.4s linear infinite}@keyframes deliver{to{stroke-dashoffset:-109}}@media(prefers-reduced-motion:reduce){.flow-packets{animation:none}}
-.controls .calc-note{margin:.8rem 0 0;max-width:65ch;line-height:1.55}.founder-history{padding-block:clamp(2rem,4vw,4rem);border-top:1px solid var(--line)}.founder-history h2{font-size:clamp(1.7rem,3vw,2.4rem);letter-spacing:-.04em;margin:.4rem 0}.founder-history>p:last-child{max-width:65ch;line-height:1.65}.port-content{transition:opacity .42s ease-in-out}.port-content.fading{opacity:0}@media(prefers-reduced-motion:reduce){.port-content{transition:none}}
+.controls .calc-note{margin:.8rem 0 0;max-width:65ch;line-height:1.55}.founder-history{padding-block:clamp(3rem,7vw,7rem);text-align:center}.founder-history h2{font-size:clamp(1.7rem,3vw,2.4rem);letter-spacing:-.04em;margin:.4rem 0}.founder-history>p:last-child{max-width:65ch;line-height:1.65}.port-content{transition:opacity .42s ease-in-out}.port-content.fading{opacity:0}@media(prefers-reduced-motion:reduce){.port-content{transition:none}}
 
 #soluciones .lead{max-width:none;text-wrap:pretty}
 .blueprint{border:0;border-radius:0;background:transparent;box-shadow:none}
@@ -64,13 +64,13 @@ h3{font-size:1.32rem;letter-spacing:-.03em}.lead{max-width:43rem;margin-top:1rem
 .ink{background:linear-gradient(transparent 75%,#85b9b45c 75%) no-repeat left bottom;background-size:var(--ink-width,0%) 100%;box-decoration-break:clone;-webkit-box-decoration-break:clone}
 .estimate{font-variant-numeric:tabular-nums}.estimate .bar span{transition:width .36s ease-out}
 
-.experience-logos{list-style:none;padding:0;margin:1.8rem 0 0;border-block:1px solid var(--line);display:grid;grid-template-columns:repeat(3,minmax(0,1fr));align-items:center}
-.experience-logos li{display:grid;place-items:center;min-height:clamp(6rem,11vw,9rem);padding:.75rem;transition:opacity .4s ease,transform .4s ease}
-.experience-logos li+li{border-inline-start:1px solid var(--line)}
+.experience-logos{list-style:none;padding:0;margin:1.8rem 0 0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));align-items:center}
+.experience-logos li{display:grid;place-items:center;min-height:clamp(6rem,11vw,9rem);padding:.75rem;transition:opacity .56s ease,transform .56s ease}
+
 .experience-logos li[hidden]{display:none}
 .experience-logos img{width:min(100%,145px);height:52px;object-fit:contain}
 .experience-logos img,.port-content image{filter:grayscale(1);opacity:.8}
-.experience-logos.is-changing li{opacity:0;transform:translateY(4px)}
+.experience-logos li.is-changing{opacity:0;transform:translateY(3px)}
 @media(prefers-reduced-motion:no-preference){
  .service-card.in-view .service-icon,.method-list li.in-view h3{animation:detail-enter .55s ease-out backwards}
  @keyframes detail-enter{from{transform:translateY(8px);opacity:.45}to{transform:none;opacity:1}}
@@ -80,3 +80,19 @@ h3{font-size:1.32rem;letter-spacing:-.03em}.lead{max-width:43rem;margin-top:1rem
  }
 }
 @media(prefers-reduced-motion:reduce){.ink{background-size:100% 100%}.experience-logos li,.estimate .bar span{transition:none}}
+
+@media(prefers-reduced-motion:no-preference){
+ .hero-copy h1,.hero-copy .intro,.hero-actions{animation:hero-arrive .75s cubic-bezier(.2,.7,.25,1) backwards}
+ .hero-copy .intro{animation-delay:.1s}.hero-actions{animation-delay:.2s}
+ @keyframes hero-arrive{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+ @supports(animation-timeline:view()){
+  :is(.problem-band,.showcase,.founder-history,.faq-layout,#metodo) h2{animation:heading-arrive linear both;animation-timeline:view();animation-range:entry 0% entry 100%}
+  @keyframes heading-arrive{from{opacity:.45;translate:0 12px}to{opacity:1;translate:0 0}}
+ }
+ @media(hover:hover) and (pointer:fine){
+  .service-card{transition:translate .28s ease,box-shadow .28s ease}
+  .service-card:hover{translate:0 -4px;box-shadow:0 9px 22px -16px #284b56}
+  .scene-picker button{transition:translate .2s ease,background-color .2s ease}
+  .scene-picker button:hover{translate:0 -2px}
+ }
+}

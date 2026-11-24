@@ -173,7 +173,7 @@ document.querySelectorAll('.service-card,.method-list li').forEach(item => detai
 const gallery = document.querySelector('.experience-logos');
 if (gallery) {
   const logos = [...gallery.children];
-  let shown = [];
+  let previousSlot;
   let visible = false;
   let timer;
   let fade;
@@ -185,26 +185,31 @@ if (gallery) {
     }
     return result;
   }
-  function nextGroup() {
-    const unseen = shuffled(logos.filter(item => !shown.includes(item)));
-    shown = shuffled([...unseen, ...shuffled(shown)].slice(0,3));
-    for (const item of logos) item.hidden = !shown.includes(item);
-    gallery.append(...shown);
+  const initial = shuffled(logos);
+  const slots = initial.slice(0,3);
+  const reserve = initial.slice(3).map(item => item.querySelector('img'));
+  gallery.replaceChildren(...slots);
+  reserve.forEach(image => { image.loading = 'eager'; });
+  function changeOne() {
+    const [slot] = shuffled(slots.filter(item => item !== previousSlot));
+    previousSlot = slot;
+    slot.classList.add('is-changing');
+    fade = setTimeout(() => {
+      const current = slot.querySelector('img');
+      const next = reserve.shift();
+      current.replaceWith(next);
+      reserve.push(current);
+      slot.classList.remove('is-changing');
+    }, 580);
   }
   function scheduleGallery() {
     clearInterval(timer);
     clearTimeout(fade);
-    gallery.classList.remove('is-changing');
+    slots.forEach(slot => slot.classList.remove('is-changing'));
     if (!visible || document.hidden || reducedMotion.matches) return;
-    timer = setInterval(() => {
-      gallery.classList.add('is-changing');
-      fade = setTimeout(() => {
-        nextGroup();
-        gallery.classList.remove('is-changing');
-      },410);
-    },4600);
+    timer = setInterval(changeOne, 3100);
   }
-  nextGroup();
+
   new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; scheduleGallery(); }).observe(gallery);
   reducedMotion.addEventListener('change',scheduleGallery);
   document.addEventListener('visibilitychange',scheduleGallery);
