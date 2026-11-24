@@ -38,7 +38,10 @@
 @media(max-width:740px){.scene-stack>.scene{grid-template-rows:auto 1fr auto}}
 
 .sheet-pile>span{box-sizing:border-box;height:2.8rem;align-self:center}
-.sheet-pile{grid-template-rows:auto repeat(3,2.8rem)}
+.sheet-pile{grid-template-rows:repeat(3,2.8rem)}
+.sheet-pile>small{position:absolute;bottom:100%;margin-bottom:.35rem}
+.sheet-pile>span:nth-of-type(2),.sheet-pile>.merged-sheet{grid-row:2}
+@media(max-width:520px){.sheets .workbench{padding-top:2rem}.sheets .transfer{align-self:center}}
 .merged-sheet{line-height:1.15;padding:.3rem .6rem}
 .sheets .ledger dl>div{transition:background-color .45s}
 .sheets[data-stage="2"] .ledger dl>div:last-child{background-color:#fbefed}

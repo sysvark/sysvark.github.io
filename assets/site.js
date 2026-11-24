@@ -27,6 +27,17 @@ if (menu && toggle) {
   matchMedia("(min-width: 761px)").addEventListener("change", () => setMenu(false));
 }
 
+const mast = document.querySelector('.mast');
+if (mast) {
+  let lastY = Math.max(0, scrollY);
+  addEventListener('scroll', () => {
+    const y = Math.max(0, scrollY);
+    if (Math.abs(y - lastY) < 6 && y > 0) return;
+    mast.classList.toggle('scrolled-down', y > mast.offsetHeight && y > lastY && !menu?.classList.contains('open'));
+    lastY = y;
+  }, {passive:true});
+}
+
 const ids = ["hours", "rate", "percent"];
 const formatHours = new Intl.NumberFormat("es-ES", { maximumFractionDigits: 2 });
 const formatMoney = new Intl.NumberFormat("es-ES", { style: "currency", currency: "EUR" });
@@ -168,12 +179,12 @@ drawInk();
 const details = new IntersectionObserver(entries => {
   for (const entry of entries) entry.target.classList.toggle('in-view',entry.isIntersecting);
 }, {threshold:.2});
-document.querySelectorAll('.service-card,.method-list li').forEach(item => details.observe(item));
+document.querySelectorAll('.method-list li').forEach(item => details.observe(item));
 
 const gallery = document.querySelector('.experience-logos');
 if (gallery) {
   const logos = [...gallery.children];
-  let previousSlot;
+
   let visible = false;
   let timer;
   let fade;
@@ -187,18 +198,18 @@ if (gallery) {
   }
   const initial = shuffled(logos);
   const slots = initial.slice(0,3);
-  const reserve = initial.slice(3).map(item => item.querySelector('img'));
+  const reserve = initial.slice(3).map(item => item.firstElementChild);
   gallery.replaceChildren(...slots);
-  reserve.forEach(image => { image.loading = 'eager'; });
+  logos.forEach(item => { const image = item.querySelector('img'); if (image) image.loading = 'eager'; });
   function changeOne() {
-    const [slot] = shuffled(slots.filter(item => item !== previousSlot));
-    previousSlot = slot;
+    const slot = slots[Math.floor(Math.random() * slots.length)];
     slot.classList.add('is-changing');
     fade = setTimeout(() => {
-      const current = slot.querySelector('img');
-      const next = reserve.shift();
+      const current = slot.firstElementChild;
+      const index = Math.floor(Math.random() * reserve.length);
+      const next = reserve[index];
       current.replaceWith(next);
-      reserve.push(current);
+      reserve[index] = current;
       slot.classList.remove('is-changing');
     }, 580);
   }
