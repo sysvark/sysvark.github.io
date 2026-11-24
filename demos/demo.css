@@ -21,7 +21,7 @@
 .inbox[data-stage="1"] .matched dd{opacity:1}.inbox .ledger dd{max-width:100%}
 .workflow-nodes{list-style:none;padding:0;margin:0}
 .workflow-nodes li{display:grid;grid-template-columns:18px 1fr;align-items:center;gap:.1rem .5rem;padding:.4rem .65rem;border-bottom:1px solid #dfebe5;color:#51656a;transition:background .4s}
-.workflow-nodes img{width:16px;height:16px;grid-row:span 2}
+.workflow-nodes{counter-reset:workflow-step}.workflow-nodes li{counter-increment:workflow-step}.workflow-nodes li::before{content:counter(workflow-step,decimal-leading-zero);grid-row:span 2;font:600 .68rem ui-monospace,monospace;color:#54727a}
 .workflow-nodes b,.workflow-nodes span{font-size:.77rem;line-height:1.35}
 .workflow-nodes span{grid-column:2}.workflow-nodes .current{background:#dcece6;color:#203d48;box-shadow:inset 3px 0 #518373}
 
@@ -36,3 +36,12 @@
 .sheets[data-stage="1"] .ledger dl div:last-child dd{opacity:1;color:#415b63}
 .sheets:not([data-stage="2"]) .verdict,.sheets[data-stage="2"] .compare{display:none}
 @media(max-width:740px){.scene-stack>.scene{grid-template-rows:auto 1fr auto}}
+
+.sheet-pile>span{box-sizing:border-box;height:2.8rem;align-self:center}
+.sheet-pile{grid-template-rows:auto repeat(3,2.8rem)}
+.merged-sheet{line-height:1.15;padding:.3rem .6rem}
+.sheets .ledger dl>div{transition:background-color .45s}
+.sheets[data-stage="2"] .ledger dl>div:last-child{background-color:#fbefed}
+.sheets[data-stage="2"] .verdict{color:#884e4a}
+
+.scene footer button[aria-pressed=true]{background-image:linear-gradient(var(--accent),var(--accent));background-repeat:no-repeat;background-position:left bottom;background-size:0% 2px}

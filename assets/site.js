@@ -149,12 +149,63 @@ if (blueprint) {
   document.addEventListener('visibilitychange', synchronize);
 }
 
-const reveal = new IntersectionObserver(entries => {
-  for (const entry of entries) {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('revealed');
-      reveal.unobserve(entry.target);
-    }
+// Tie the underline to viewport position so scrolling back retraces the stroke.
+const inkWords = [...document.querySelectorAll('.ink')];
+let inkFrame;
+function drawInk() {
+  inkFrame = 0;
+  for (const word of inkWords) {
+    const top = word.getBoundingClientRect().top;
+    const progress = Math.max(0, Math.min(1, (.88 * innerHeight - top) / (.22 * innerHeight)));
+    word.style.setProperty('--ink-width', (progress * 100).toFixed(1) + '%');
   }
-}, {threshold: .3});
-document.querySelectorAll('.ink, .experience-logos li').forEach(element => reveal.observe(element));
+}
+function queueInk() { if (!inkFrame) inkFrame = requestAnimationFrame(drawInk); }
+addEventListener('scroll', queueInk, {passive:true});
+addEventListener('resize', queueInk);
+drawInk();
+
+const details = new IntersectionObserver(entries => {
+  for (const entry of entries) entry.target.classList.toggle('in-view',entry.isIntersecting);
+}, {threshold:.2});
+document.querySelectorAll('.service-card,.method-list li').forEach(item => details.observe(item));
+
+const gallery = document.querySelector('.experience-logos');
+if (gallery) {
+  const logos = [...gallery.children];
+  let shown = [];
+  let visible = false;
+  let timer;
+  let fade;
+  function shuffled(items) {
+    const result = [...items];
+    for (let i=result.length-1;i>0;i--) {
+      const j = Math.floor(Math.random()*(i+1));
+      [result[i],result[j]] = [result[j],result[i]];
+    }
+    return result;
+  }
+  function nextGroup() {
+    const unseen = shuffled(logos.filter(item => !shown.includes(item)));
+    shown = shuffled([...unseen, ...shuffled(shown)].slice(0,3));
+    for (const item of logos) item.hidden = !shown.includes(item);
+    gallery.append(...shown);
+  }
+  function scheduleGallery() {
+    clearInterval(timer);
+    clearTimeout(fade);
+    gallery.classList.remove('is-changing');
+    if (!visible || document.hidden || reducedMotion.matches) return;
+    timer = setInterval(() => {
+      gallery.classList.add('is-changing');
+      fade = setTimeout(() => {
+        nextGroup();
+        gallery.classList.remove('is-changing');
+      },410);
+    },4600);
+  }
+  nextGroup();
+  new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; scheduleGallery(); }).observe(gallery);
+  reducedMotion.addEventListener('change',scheduleGallery);
+  document.addEventListener('visibilitychange',scheduleGallery);
+}

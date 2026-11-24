@@ -7,12 +7,14 @@ let example = 0;
 let stage = 0;
 let visible = false;
 let timer;
+let progress;
+const stageDuration = 4200;
 
 const descriptions = [
   ['Cada tienda envía su Excel de ventas. Administración necesita reunir los tres archivos para cerrar el mes.', 'Las tres hojas se reúnen en Marzo.xlsx y se cruzan por código. La venta OP-102 figura en dos hojas con el mismo importe y se agrupa una sola vez.', 'OP-103 tiene dos importes distintos. El informe conserva ambos para que administración compruebe la diferencia.'],
   ['Llega una factura con importes, una nota de entrega y una firma.', 'El OCR localiza la base, el IVA y el total. La firma y la nota de entrega quedan fuera de la extracción.', 'Los tres importes seleccionados pasan al registro contable, listos para su validación.'],
   ['El cliente esperaba su paquete ayer. Su correo inicia una consulta de entrega.', 'El sistema reconoce una consulta sobre un envío retrasado y la asigna al equipo de logística.', 'El flujo consulta el seguimiento del transportista y envía al cliente la franja de entrega confirmada.'],
-  ['Una tienda pide dos cajas de aceite. El formulario envía la solicitud al flujo.', 'El flujo consulta el inventario de aceite en Airtable. Quedan tres cajas.', 'n8n compara las dos cajas solicitadas con las tres disponibles. Hay existencias para atender el pedido.', 'La reserva de dos cajas se anota en la hoja de pedidos.', 'La tienda recibe por correo la confirmación de su reserva.']
+  ['Una tienda pide dos cajas de aceite. El formulario envía la solicitud al flujo.', 'El flujo consulta las existencias de aceite. Quedan tres cajas.', 'El sistema compara las dos cajas solicitadas con las tres disponibles. Hay existencias para atender el pedido.', 'La reserva de dos cajas se anota en la hoja de pedidos.', 'La tienda recibe por correo la confirmación de su reserva.']
 ];
 scenes.forEach((scene, index) => {
   const paragraph = scene.querySelector('header p');
@@ -43,7 +45,12 @@ function render() {
 }
 function schedule() {
   clearTimeout(timer);
+  progress?.cancel();
   if (!visible || document.hidden || motion.matches) return;
+  progress = steps[example][stage].animate(
+    [{backgroundSize:'0% 2px'}, {backgroundSize:'100% 2px'}],
+    {duration:stageDuration, easing:'linear', fill:'forwards'}
+  );
   timer = setTimeout(() => {
     if (stage + 1 < steps[example].length) stage++;
     else {
@@ -54,7 +61,7 @@ function schedule() {
     }
     render();
     schedule();
-  }, 4200);
+  }, stageDuration);
 }
 function select(index, step) {
   example = index;
