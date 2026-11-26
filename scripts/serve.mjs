@@ -2,7 +2,7 @@ import http from 'node:http';
 import path from 'node:path';
 import {readFile} from 'node:fs/promises';
 const root = path.resolve('dist');
-const mime = {html:'text/html; charset=utf-8', js:'text/javascript', mjs:'text/javascript', css:'text/css', svg:'image/svg+xml', png:'image/png', pdf:'application/pdf', xml:'application/xml', json:'application/json', txt:'text/plain', xlsx:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', woff2:'font/woff2'};
+const mime = {html:'text/html; charset=utf-8', js:'text/javascript', mjs:'text/javascript', css:'text/css', svg:'image/svg+xml', png:'image/png', webp:'image/webp', ico:'image/x-icon', pdf:'application/pdf', xml:'application/xml', json:'application/json', txt:'text/plain', xlsx:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', woff2:'font/woff2'};
 const port = Number(process.env.PORT || 4173);
 export const server = http.createServer(async (req, res) => {
   try {
