@@ -1,0 +1,7 @@
+{
+  "inside": "TypeError: Failed to fetch",
+  "robotsStatus": 200,
+  "robotsBody": "User-agent: *\nAllow: /\nSitemap: https://sysvark.github.io/sitemap.xml\n",
+  "sitemapStatus": 200,
+  "sitemapBody": "<?xml version=\"1.0\" encoding=\"UTF-8\"?><urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\"><url><loc>https://sysvark.github.io/</loc></url><url><loc>https://sysvark.github.io/aviso-legal.html</loc></url><url><loc>https://sysvark.github.io/privacidad.html</loc></url></urlset>"
+}

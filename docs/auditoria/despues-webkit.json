@@ -1,0 +1,250 @@
+{
+  "phase": "despues",
+  "browser": "webkit",
+  "version": "26.5",
+  "layout": [
+    {
+      "width": 320,
+      "height": 844,
+      "zoom": 1,
+      "issues": []
+    },
+    {
+      "width": 360,
+      "height": 844,
+      "zoom": 1,
+      "issues": []
+    },
+    {
+      "width": 375,
+      "height": 844,
+      "zoom": 1,
+      "issues": []
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "zoom": 1,
+      "issues": []
+    },
+    {
+      "width": 393,
+      "height": 844,
+      "zoom": 1,
+      "issues": []
+    },
+    {
+      "width": 414,
+      "height": 844,
+      "zoom": 1,
+      "issues": []
+    },
+    {
+      "width": 430,
+      "height": 844,
+      "zoom": 1,
+      "issues": []
+    },
+    {
+      "width": 480,
+      "height": 844,
+      "zoom": 1,
+      "issues": []
+    },
+    {
+      "width": 600,
+      "height": 900,
+      "zoom": 1,
+      "issues": []
+    },
+    {
+      "width": 740,
+      "height": 900,
+      "zoom": 1,
+      "issues": []
+    },
+    {
+      "width": 760,
+      "height": 900,
+      "zoom": 1,
+      "issues": []
+    },
+    {
+      "width": 768,
+      "height": 900,
+      "zoom": 1,
+      "issues": []
+    },
+    {
+      "width": 820,
+      "height": 900,
+      "zoom": 1,
+      "issues": []
+    },
+    {
+      "width": 1024,
+      "height": 900,
+      "zoom": 1,
+      "issues": []
+    },
+    {
+      "width": 1280,
+      "height": 900,
+      "zoom": 1,
+      "issues": []
+    },
+    {
+      "width": 1366,
+      "height": 900,
+      "zoom": 1,
+      "issues": []
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "zoom": 1,
+      "issues": []
+    },
+    {
+      "width": 1536,
+      "height": 900,
+      "zoom": 1,
+      "issues": []
+    },
+    {
+      "width": 1920,
+      "height": 900,
+      "zoom": 1,
+      "issues": []
+    },
+    {
+      "width": 2560,
+      "height": 900,
+      "zoom": 1,
+      "issues": []
+    },
+    {
+      "width": 844,
+      "height": 390,
+      "zoom": 1,
+      "issues": []
+    },
+    {
+      "width": 1024,
+      "height": 600,
+      "zoom": 1,
+      "issues": []
+    },
+    {
+      "width": 1366,
+      "height": 768,
+      "zoom": 1,
+      "issues": []
+    },
+    {
+      "width": 1280,
+      "height": 900,
+      "zoom": 1.25,
+      "issues": []
+    },
+    {
+      "width": 1280,
+      "height": 900,
+      "zoom": 2,
+      "issues": []
+    },
+    {
+      "width": 1280,
+      "height": 900,
+      "zoom": 4,
+      "issues": []
+    },
+    {
+      "width": 320,
+      "height": 900,
+      "zoom": 1,
+      "issues": []
+    },
+    {
+      "width": 768,
+      "height": 900,
+      "zoom": 1,
+      "issues": []
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "zoom": 1,
+      "issues": []
+    },
+    {
+      "width": 320,
+      "height": 900,
+      "zoom": 1,
+      "issues": []
+    },
+    {
+      "width": 768,
+      "height": 900,
+      "zoom": 1,
+      "issues": []
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "zoom": 1,
+      "issues": []
+    },
+    {
+      "width": 320,
+      "height": 900,
+      "zoom": 1,
+      "issues": []
+    },
+    {
+      "width": 768,
+      "height": 900,
+      "zoom": 1,
+      "issues": []
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "zoom": 1,
+      "issues": []
+    }
+  ],
+  "pages": [
+    {
+      "url": "/",
+      "h1": 1,
+      "lang": "es-ES",
+      "canonical": "https://sysvark.github.io/",
+      "loadMs": 878,
+      "resourceBytes": 89691,
+      "links": 22
+    },
+    {
+      "url": "aviso-legal.html",
+      "status": 200,
+      "title": "Aviso legal · SYSVARK",
+      "h1": 1
+    },
+    {
+      "url": "privacidad.html",
+      "status": 200,
+      "title": "Política de privacidad · SYSVARK",
+      "h1": 1
+    },
+    {
+      "url": "ruta-inexistente-auditoria/",
+      "status": 404,
+      "title": "Página no encontrada · SYSVARK",
+      "h1": 1
+    }
+  ],
+  "violations": [],
+  "errors": [],
+  "external": [],
+  "warnings": []
+}

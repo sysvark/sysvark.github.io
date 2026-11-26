@@ -40,20 +40,17 @@ Para introducir otro idioma, conserva esta portada en la raíz y crea una ruta e
 
 ### Datos y contacto
 
-Las escenas ilustran la consolidación de hojas, la lectura de facturas el reparto de solicitudes y un flujo de pedido conectado. Avanzan automáticamente con datos ficticios. El selector de ejemplo y los botones de etapa permiten recorrerlas manualmente. El modo de movimiento reducido desactiva el avance automático. La calculadora usa 52 semanas por año y 12 meses.
+Las escenas ilustran la consolidación de hojas, la lectura de facturas, el seguimiento de envíos y un flujo de pedido conectado. Avanzan automáticamente con datos ficticios. El selector de ejemplo y los botones de etapa permiten recorrerlas manualmente. El modo de movimiento reducido desactiva el avance automático. La calculadora usa 52 semanas por año y 12 meses.
 
 El formulario envía la consulta a sysvark@outlook.com mediante FormSubmit. El buzón debe confirmar el enlace de activación del proveedor. La web muestra el acuse únicamente cuando FormSubmit acepta la consulta y conserva los campos ante un error.
 
-Las únicas variables son `SITE_URL` (origen HTTPS de la web, obtenido de Pages en el workflow), `FORMSPREE_ENDPOINT` (opcional) y `PORT` (desarrollo). Se leen del entorno del proceso. Todo valor incorporado al navegador es público. Mantén claves privadas, tokens, contraseñas y códigos de recuperación fuera de estas variables y del repositorio.
+La compilación admite SITE_URL como origen HTTPS. El servidor local admite PORT. No incluyas secretos en los recursos que recibe el navegador.
 
 ## GitHub Pages
 
-1. En la cuenta dedicada, crea un repositorio público vacío llamado exactamente **usuario.github.io**, sustituyendo *usuario* por el nombre confirmado.
-2. En **Settings → Pages → Build and deployment**, selecciona **GitHub Actions**. Sube las fuentes a la rama `main` y consulta la ejecución **Publicar web en Pages** en Actions.
-3. La compilación instala desde el archivo de bloqueo, ejecuta las pruebas, integra secciones, comprueba los enlaces y sube únicamente `dist/`. El trabajo de despliegue recibe los permisos de escritura en Pages e identidad temporal. Si falla la compilación, el despliegue no se inicia.
-4. Comprueba la URL de entorno de la ejecución terminada, el certificado HTTPS, el 404, la compactación al desplazarse y el ciclo completo de las cuatro escenas. En **Settings → Pages**, verifica **Enforce HTTPS** cuando esté disponible. La URL del repositorio no es la URL de la web.
+El candidato incluye el flujo **Validar y publicar la web**. Las subidas y las solicitudes de cambios validan pruebas y exportación. Solo la ejecución manual sobre main despliega en GitHub Pages. El sitio anterior al candidato mantiene su flujo histórico hasta que se apruebe la integración.
 
-Las condiciones de Pages afectan al uso comercial. Mantén esta edición informativa mientras se resuelve la captación. Consulta las fuentes y decisiones en `docs/verificaciones.md`. Para migrar, configura `SITE_URL` con el nuevo origen, compila y sirve el contenido de `dist/` desde la raíz de un alojamiento estático con HTTPS. No se ha configurado un dominio propio.
+El informe de auditoría reúne los resultados, las opciones de privacidad, las condiciones del alojamiento y el procedimiento de reversión. [Informe técnico](docs/auditoria/INFORME.md) · [Seguridad y alojamiento](docs/auditoria/seguridad.md)
 
 ## Mantenimiento y diagnóstico
 

@@ -1,0 +1,42 @@
+[
+  {
+    "version": "antes",
+    "delaysOver16ms": [
+      40,
+      40,
+      40,
+      48,
+      48,
+      96,
+      96,
+      96,
+      128,
+      128,
+      128,
+      40,
+      40,
+      40
+    ],
+    "note": "Duraciones de eventos locales agrupables por interacción. No son INP de campo."
+  },
+  {
+    "version": "despues",
+    "delaysOver16ms": [
+      24,
+      24,
+      24,
+      16,
+      32,
+      24,
+      24,
+      24,
+      24,
+      24,
+      24,
+      24,
+      24,
+      24
+    ],
+    "note": "Duraciones de eventos locales agrupables por interacción. No son INP de campo."
+  }
+]

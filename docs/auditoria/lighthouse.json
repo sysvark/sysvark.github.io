@@ -1,0 +1,212 @@
+[
+  {
+    "file": "baseline-desktop-2.json",
+    "version": "12.8.2",
+    "chrome": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/158.0.0.0 Safari/537.36",
+    "scores": {
+      "performance": 100,
+      "accessibility": 96,
+      "best-practices": 100,
+      "seo": 100
+    },
+    "lcp": 419.8404999999999,
+    "cls": 0,
+    "tbt": 14.999999999999943,
+    "bytes": 319024
+  },
+  {
+    "file": "baseline-desktop.json",
+    "version": "12.8.2",
+    "chrome": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/158.0.0.0 Safari/537.36",
+    "scores": {
+      "performance": 100,
+      "accessibility": 96,
+      "best-practices": 100,
+      "seo": 100
+    },
+    "lcp": 445.438125,
+    "cls": 0,
+    "tbt": 0,
+    "bytes": 318746
+  },
+  {
+    "file": "baseline-mobile-2.json",
+    "version": "12.8.2",
+    "chrome": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/158.0.0.0 Safari/537.36",
+    "scores": {
+      "performance": 77,
+      "accessibility": 96,
+      "best-practices": 100,
+      "seo": 100
+    },
+    "lcp": 2566.2583999999997,
+    "cls": 0,
+    "tbt": 822,
+    "bytes": 318746
+  },
+  {
+    "file": "baseline-mobile-solo.json",
+    "version": "12.8.2",
+    "chrome": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/158.0.0.0 Safari/537.36",
+    "scores": {
+      "performance": 92,
+      "accessibility": 96,
+      "best-practices": 100,
+      "seo": 100
+    },
+    "lcp": 2034.4359999999997,
+    "cls": 0,
+    "tbt": 302,
+    "bytes": 318746
+  },
+  {
+    "file": "baseline-mobile.json",
+    "version": "12.8.2",
+    "chrome": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/158.0.0.0 Safari/537.36",
+    "scores": {
+      "performance": 91,
+      "accessibility": 96,
+      "best-practices": 100,
+      "seo": 100
+    },
+    "lcp": 2099.683,
+    "cls": 0,
+    "tbt": 352.5,
+    "bytes": 328068
+  },
+  {
+    "file": "final-desktop-2.json",
+    "version": "12.8.2",
+    "chrome": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/158.0.0.0 Safari/537.36",
+    "scores": {
+      "performance": 100,
+      "accessibility": 96,
+      "best-practices": 100,
+      "seo": 92
+    },
+    "lcp": 373.6155048040607,
+    "cls": 0,
+    "tbt": 0,
+    "bytes": 134976
+  },
+  {
+    "file": "final-desktop-3.json",
+    "version": "12.8.2",
+    "chrome": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/158.0.0.0 Safari/537.36",
+    "scores": {
+      "performance": 100,
+      "accessibility": 97,
+      "best-practices": 100,
+      "seo": 92
+    },
+    "lcp": 387.3510999999999,
+    "cls": 0,
+    "tbt": 14.499999999999943,
+    "bytes": 126075
+  },
+  {
+    "file": "final-mobile-2.json",
+    "version": "12.8.2",
+    "chrome": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/158.0.0.0 Safari/537.36",
+    "scores": {
+      "performance": 97,
+      "accessibility": 96,
+      "best-practices": 100,
+      "seo": 92
+    },
+    "lcp": 1447.848025753325,
+    "cls": 0.1092081912925624,
+    "tbt": 0,
+    "bytes": 125666
+  },
+  {
+    "file": "final-mobile-3.json",
+    "version": "12.8.2",
+    "chrome": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/158.0.0.0 Safari/537.36",
+    "scores": {
+      "performance": 93,
+      "accessibility": 97,
+      "best-practices": 100,
+      "seo": 92
+    },
+    "lcp": 1769.3182500000005,
+    "cls": 0,
+    "tbt": 309.4545000000005,
+    "bytes": 135107
+  },
+  {
+    "file": "release-desktop-solo.json",
+    "version": "12.8.2",
+    "chrome": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/158.0.0.0 Safari/537.36",
+    "scores": {
+      "performance": 100,
+      "accessibility": 100,
+      "best-practices": 100,
+      "seo": 92
+    },
+    "lcp": 370.64355,
+    "cls": 0,
+    "tbt": 0,
+    "bytes": 135140
+  },
+  {
+    "file": "release-desktop.json",
+    "version": "12.8.2",
+    "chrome": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/158.0.0.0 Safari/537.36",
+    "scores": {
+      "performance": 100,
+      "accessibility": 100,
+      "best-practices": 100,
+      "seo": 92
+    },
+    "lcp": 381.5800852635338,
+    "cls": 0,
+    "tbt": 13.999999999999972,
+    "bytes": 125830
+  },
+  {
+    "file": "release-mobile-repeat.json",
+    "version": "12.8.2",
+    "chrome": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/158.0.0.0 Safari/537.36",
+    "scores": {
+      "performance": 94,
+      "accessibility": 100,
+      "best-practices": 100,
+      "seo": 92
+    },
+    "lcp": 1648.2043499999995,
+    "cls": 0,
+    "tbt": 269.19709999999975,
+    "bytes": 135140
+  },
+  {
+    "file": "release-mobile-solo.json",
+    "version": "12.8.2",
+    "chrome": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/158.0.0.0 Safari/537.36",
+    "scores": {
+      "performance": 100,
+      "accessibility": 100,
+      "best-practices": 100,
+      "seo": 92
+    },
+    "lcp": 1507.8820201298481,
+    "cls": 0,
+    "tbt": 3,
+    "bytes": 125830
+  },
+  {
+    "file": "release-mobile.json",
+    "version": "12.8.2",
+    "chrome": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/158.0.0.0 Safari/537.36",
+    "scores": {
+      "performance": 100,
+      "accessibility": 100,
+      "best-practices": 100,
+      "seo": 92
+    },
+    "lcp": 1434.0371130377878,
+    "cls": 0,
+    "tbt": 0,
+    "bytes": 125830
+  }
+]

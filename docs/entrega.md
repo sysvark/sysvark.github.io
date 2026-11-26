@@ -1,5 +1,7 @@
 # Entrega técnica de SYSVARK
 
+Documento histórico de la entrega inicial. El estado actual del formulario, la publicación y las pruebas se documenta en el [informe de auditoría](auditoria/INFORME.md).
+
 ## Activos
 
 Identidad visual en `brand/` y `assets/`. El archivo `brand/GUIA.md` identifica tipografía, paleta, eslogan y cada variante. Portada española con cuatro servicios, dos demostraciones, calculadora, método, preguntas frecuentes, formulario desactivado, aviso legal y política de privacidad. La exportación en `dist/` incluye icono, Open Graph, datos estructurados, sitemap, robots y 404.

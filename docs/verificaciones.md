@@ -1,5 +1,7 @@
 # Verificaciones previas · 24 de noviembre de 2026
 
+Documento histórico de la entrega inicial. El estado actual del formulario, la publicación y las pruebas se documenta en el [informe de auditoría](auditoria/INFORME.md).
+
 ## Nombre y dominios
 
 La búsqueda pública preliminar de SYSVARK no identificó una empresa tecnológica homónima confirmada. Sí existe **SYVARK ESTUDIO SL**, en España, dedicada a arquitectura e interiorismo. La diferencia es una «s». El sector y la semejanza visual y fonética merecen revisión antes de invertir en la marca. Se comunicó la coincidencia al fundador. [Sitio de SYVARK](https://syvark.com/) · [Identificación de su titular](https://syvark.com/nota-legal/)
