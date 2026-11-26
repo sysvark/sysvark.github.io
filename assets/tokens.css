@@ -1,0 +1,28 @@
+/* Shared primitives for the website, examples and information pages. */
+:root {
+  --paper: #fafaf8;
+  --surface: #fff;
+  --surface-muted: #eef2f1;
+  --ink: #171717;
+  --petrol: #203d48;
+  --muted: #4e6066;
+  --line: #cfd9da;
+  --control-line: #788b91;
+  --accent: #496d79;
+  --focus: #1d718d;
+  --on-dark: #f7faf9;
+  --on-dark-muted: #c9dade;
+  --font-body: "Segoe UI", Arial, Helvetica, sans-serif;
+  --font-mono: Consolas, "Courier New", monospace;
+  --container: 80rem;
+  --page-width: min(90%, var(--container));
+  --section-space: clamp(3.5rem, 6vw, 6rem);
+  --column-gap: clamp(1.75rem, 5vw, 5rem);
+  --title-size: clamp(2.15rem, 3.8vw, 3.8rem);
+  --lead-size: clamp(1.03rem, 1.3vw, 1.2rem);
+  --radius-control: .4rem;
+  --radius-panel: .65rem;
+  --tap: 2.75rem;
+  --ease: cubic-bezier(.2, .7, .25, 1);
+  --quick: 180ms;
+}

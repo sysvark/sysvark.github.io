@@ -46,7 +46,7 @@ function render() {
 function schedule() {
   clearTimeout(timer);
   progress?.cancel();
-  if (!visible || document.hidden || motion.matches) return;
+  if (!visible || document.hidden || motion.matches || theater.querySelector(':focus-visible')) return;
   progress = steps[example][stage].animate(
     [{backgroundSize:'0% 2px'}, {backgroundSize:'100% 2px'}],
     {duration:stageDuration, easing:'linear', fill:'forwards'}
@@ -54,10 +54,8 @@ function schedule() {
   timer = setTimeout(() => {
     if (stage + 1 < steps[example].length) stage++;
     else {
-      const previous = scenes[example];
       example = (example + 1) % scenes.length;
       stage = 0;
-      if (previous.contains(document.activeElement)) choices[example].focus({preventScroll:true});
     }
     render();
     schedule();
@@ -72,6 +70,9 @@ function select(index, step) {
 choices.forEach((button, i) => button.addEventListener('click', () => select(i, 0)));
 steps.forEach((buttons,i) => buttons.forEach((button,j) => button.addEventListener('click', () => select(i,j))));
 new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; schedule(); }).observe(theater);
+theater.addEventListener('focusin', schedule);
+theater.addEventListener('focusout', () => queueMicrotask(schedule));
 document.addEventListener('visibilitychange', schedule);
 motion.addEventListener('change', schedule);
 render();
+theater.classList.add('ready');

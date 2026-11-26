@@ -1,7 +1,5 @@
 "use strict";
 
-
-
 document.documentElement.classList.add("js");
 
 const menu = document.getElementById("primary-nav");
@@ -24,7 +22,7 @@ if (menu && toggle) {
       toggle.focus();
     }
   });
-  matchMedia("(min-width: 761px)").addEventListener("change", () => setMenu(false));
+  matchMedia("(min-width: 921px)").addEventListener("change", () => setMenu(false));
 }
 
 const mast = document.querySelector('.mast');
@@ -38,60 +36,7 @@ if (mast) {
   }, {passive:true});
 }
 
-const ids = ["hours", "rate", "percent"];
-const formatHours = new Intl.NumberFormat("es-ES", { maximumFractionDigits: 2 });
-const formatMoney = new Intl.NumberFormat("es-ES", { style: "currency", currency: "EUR" });
-const ranges = ids.map(id => document.getElementById(id + "-range"));
-
-let displayed;
-let estimateFrame;
 const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
-function displayEstimate() {
-  const [hours, rate, percent] = ranges.map(range => Number(range.value));
-  const monthlyHours = hours * 52 / 12;
-  const monthlySaved = monthlyHours * percent / 100;
-  const target = [monthlyHours, monthlySaved, monthlyHours - monthlySaved, monthlySaved * 12,
-    monthlyHours * rate, monthlySaved * rate, monthlySaved * rate * 12];
-  const outputs = ['monthly-hours','monthly-saved','remaining-hours','yearly-hours','monthly-cost','monthly-value','yearly-value'];
-  const start = displayed || target;
-  const duration = displayed && !reducedMotion.matches ? 360 : 0;
-  const began = performance.now();
-  cancelAnimationFrame(estimateFrame);
-  function paint(now) {
-    const t = duration ? Math.min(1, Math.max(0, (now - began) / duration)) : 1;
-    displayed = target.map((value, i) => t === 1 ? value : value + (start[i] - value) * (1 - t) ** 3);
-    outputs.forEach((id, i) => {
-      document.getElementById(id).textContent = i < 4 ? formatHours.format(displayed[i]) + ' h' : formatMoney.format(displayed[i]);
-    });
-    if (t < 1) estimateFrame = requestAnimationFrame(paint);
-  }
-  paint(began);
-  document.getElementById("current-bar").style.width = hours > 0 ? "100%" : "0";
-  document.getElementById("future-bar").style.width = (hours > 0 ? 100 - percent : 0) + "%";
-}
-
-if (ranges.every(Boolean)) {
-  ids.forEach((id, index) => {
-    const number = document.getElementById(id + "-number");
-    const range = ranges[index];
-    range.addEventListener("input", () => {
-      number.value = range.value;
-      displayEstimate();
-    });
-    number.addEventListener("input", () => {
-      if (number.value !== "" && number.validity.valid) {
-        range.value = number.value;
-        displayEstimate();
-      }
-    });
-    number.addEventListener("change", () => {
-      range.value = number.value || "0";
-      number.value = range.value;
-      displayEstimate();
-    });
-  });
-  displayEstimate();
-}
 
 const blueprint = document.querySelector('.blueprint');
 if (blueprint) {
