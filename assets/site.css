@@ -96,7 +96,11 @@ h3{font-size:1.32rem;letter-spacing:-.03em}.lead{max-width:43rem;margin-top:1rem
 
 .mast{transition:transform .23s ease}
 .mast.scrolled-down:not(:has(:focus-visible)){transform:translateY(-101%)}
-.founder-history .experience-logos{max-width:60rem;margin:2.2rem 0 0;gap:clamp(.65rem,3vw,3rem)}
+@media(min-width:761px){
+  .experience-logos{gap:2.2rem;margin-top:2.7rem}
+  .experience-logos li{min-height:7rem;border-top:1px solid #90a6ad}
+}
+@media(max-width:760px){.experience-logos{gap:.65rem}.experience-logos li{padding:.35rem}}
 
 @media(hover:hover) and (pointer:fine){#soluciones .service-card.pointer-over{background:#fff;border-color:var(--line);border-radius:10px}}
 @media(prefers-reduced-motion:reduce){.mast{transition:none}}
